@@ -1,0 +1,11 @@
+diff -urw kio-5.12.0/src/core/kfileitem.cpp KIO/src/core/kfileitem.cpp
+--- kio-5.12.0/src/core/kfileitem.cpp	2015-07-05 12:06:31.000000000 +0300
++++ KIO/src/core/kfileitem.cpp	2015-07-30 12:37:27.571896605 +0300
+@@ -30,6 +30,7 @@
+ #include <QMimeDatabase>
+ #include <QDebug>
+ #include <qplatformdefs.h>
++#include <QDataStream>
+ 
+ #include <klocalizedstring.h>
+ #include <kdesktopfile.h>

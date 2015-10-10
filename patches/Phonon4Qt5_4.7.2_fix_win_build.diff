@@ -1,0 +1,12 @@
+diff -ur phonon-4.7.2/phonon/factory.cpp Phonon4Qt5/phonon/factory.cpp
+--- phonon-4.7.2/phonon/factory.cpp	2014-06-20 11:37:19.000000000 +0300
++++ Phonon4Qt5/phonon/factory.cpp	2015-07-30 20:28:24.350689090 +0300
+@@ -42,6 +42,8 @@
+ #endif
+ #include <QApplication>
+ #include <QMessageBox>
++#include <QString>
++#include <QSettings>
+ 
+ namespace Phonon
+ {

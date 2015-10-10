@@ -1,0 +1,76 @@
+diff -urw kconfigwidgets-5.12.0/CMakeLists.txt ConfigWidgets/CMakeLists.txt
+--- kconfigwidgets-5.12.0/CMakeLists.txt	2015-07-05 11:55:00.000000000 +0300
++++ ConfigWidgets/CMakeLists.txt	2015-07-30 14:09:04.354729297 +0300
+@@ -27,11 +27,11 @@
+                         PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF5ConfigWidgetsConfigVersion.cmake"
+                         SOVERSION 5)
+ 
+-find_package(KF5Auth ${KF5_DEP_VERSION} REQUIRED)
++#find_package(KF5Auth ${KF5_DEP_VERSION} REQUIRED)
+ find_package(KF5CoreAddons ${KF5_DEP_VERSION} REQUIRED)
+ find_package(KF5Codecs ${KF5_DEP_VERSION} REQUIRED)
+ find_package(KF5Config ${KF5_DEP_VERSION} REQUIRED)
+-find_package(KF5DocTools ${KF5_DEP_VERSION} REQUIRED)
++#find_package(KF5DocTools ${KF5_DEP_VERSION} REQUIRED)
+ find_package(KF5GuiAddons ${KF5_DEP_VERSION} REQUIRED)
+ find_package(KF5I18n ${KF5_DEP_VERSION} REQUIRED)
+ find_package(KF5WidgetsAddons ${KF5_DEP_VERSION} REQUIRED)
+@@ -42,7 +42,7 @@
+ add_definitions(-DTRANSLATION_DOMAIN=\"kconfigwidgets5\")
+ if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
+     ki18n_install(po)
+-    kdoctools_install(po)
++    #kdoctools_install(po)
+ 
+     file(GLOB lang_dirs "po/*")
+     foreach(lang_dir ${lang_dirs})
+@@ -52,7 +52,7 @@
+        endif()
+     endforeach()
+ endif()
+-add_subdirectory(docs)
++#add_subdirectory(docs)
+ add_subdirectory(src)
+ add_subdirectory(tests)
+ add_subdirectory(autotests)
+diff -urw kconfigwidgets-5.12.0/KF5ConfigWidgetsConfig.cmake.in ConfigWidgets/KF5ConfigWidgetsConfig.cmake.in
+--- kconfigwidgets-5.12.0/KF5ConfigWidgetsConfig.cmake.in	2015-07-05 11:55:00.000000000 +0300
++++ ConfigWidgets/KF5ConfigWidgetsConfig.cmake.in	2015-07-30 14:22:48.168508733 +0300
+@@ -1,6 +1,6 @@
+ @PACKAGE_INIT@
+ 
+-find_dependency(KF5Auth "@KF5_DEP_VERSION@")
++#find_dependency(KF5Auth "@KF5_DEP_VERSION@")
+ find_dependency(KF5Codecs "@KF5_DEP_VERSION@")
+ find_dependency(KF5Config "@KF5_DEP_VERSION@")
+ find_dependency(KF5WidgetsAddons "@KF5_DEP_VERSION@")
+diff -urw kconfigwidgets-5.12.0/src/CMakeLists.txt ConfigWidgets/src/CMakeLists.txt
+--- kconfigwidgets-5.12.0/src/CMakeLists.txt	2015-07-05 11:55:00.000000000 +0300
++++ ConfigWidgets/src/CMakeLists.txt	2015-07-30 14:09:04.594730971 +0300
+@@ -5,7 +5,7 @@
+   kconfigdialog.cpp
+   kconfigviewstatesaver.cpp
+   kconfigdialogmanager.cpp
+-  kcmodule.cpp
++  #kcmodule.cpp
+   khelpclient.cpp
+   klanguagebutton.cpp
+   kpastetextaction.cpp
+@@ -25,7 +25,7 @@
+     KF5::Codecs # KCodecActions uses KCharsets, KEncodingProber
+     KF5::WidgetsAddons # For K*Action, KPage*, KViewStateSerializer, KAcceleratorManager, K*GuiItem
+     KF5::ConfigGui # KStandardAction uses KStandardShortcut
+-    KF5::Auth # KCModule uses KAuth::Action
++    #KF5::Auth # KCModule uses KAuth::Action
+   PRIVATE
+     Qt5::DBus # KPasteTextAction talks to Klipper via DBus
+     KF5::CoreAddons # KCModule uses KAboutData, KTipDialog uses KRandom
+@@ -46,7 +46,7 @@
+   KConfigDialog
+   KConfigViewStateSaver
+   KConfigDialogManager
+-  KCModule
++  #KCModule
+   KHelpClient
+   KLanguageButton
+   KPasteTextAction

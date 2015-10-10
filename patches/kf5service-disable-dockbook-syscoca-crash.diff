@@ -1,0 +1,40 @@
+diff -urw kservice-5.12.0/CMakeLists.txt Service/CMakeLists.txt
+--- kservice-5.12.0/CMakeLists.txt	2015-07-05 12:13:00.000000000 +0300
++++ Service/CMakeLists.txt	2015-07-30 01:09:20.057630240 +0300
+@@ -37,10 +37,10 @@
+ 
+ find_package(KF5Config ${KF5_DEP_VERSION} REQUIRED)
+ find_package(KF5CoreAddons ${KF5_DEP_VERSION} REQUIRED)
+-find_package(KF5Crash ${KF5_DEP_VERSION} REQUIRED)
++#find_package(KF5Crash ${KF5_DEP_VERSION} REQUIRED)
+ find_package(KF5DBusAddons ${KF5_DEP_VERSION} REQUIRED)
+ find_package(KF5I18n ${KF5_DEP_VERSION} REQUIRED)
+-find_package(KF5DocTools REQUIRED)
++#find_package(KF5DocTools REQUIRED)
+ 
+ # create a Config.cmake and a ConfigVersion.cmake file and install them
+ set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5Service")
+@@ -67,9 +67,9 @@
+ add_definitions(-DTRANSLATION_DOMAIN=\"kservice5\")
+ if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
+     ki18n_install(po)
+-    kdoctools_install(po)
++    #kdoctools_install(po)
+ endif()
+-add_subdirectory(docs)
++#add_subdirectory(docs)
+ add_subdirectory(src)
+ if (BUILD_TESTING)
+     add_subdirectory(autotests)
+diff -urw kservice-5.12.0/src/CMakeLists.txt Service/src/CMakeLists.txt
+--- kservice-5.12.0/src/CMakeLists.txt	2015-07-05 12:13:00.000000000 +0300
++++ Service/src/CMakeLists.txt	2015-07-30 01:29:11.116061800 +0300
+@@ -132,7 +132,7 @@
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/KService COMPONENT Devel
+ )
+ 
+-add_subdirectory(kbuildsycoca)
++#add_subdirectory(kbuildsycoca)
+ 
+ include(ECMGeneratePriFile)
+ ecm_generate_pri_file(BASE_NAME KService LIB_NAME KF5Service DEPS "KConfigCore" FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR_KF5}/KService)
