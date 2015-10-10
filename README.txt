@@ -22,16 +22,18 @@ cmake -G "NMake Makefiles JOM" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX
 cmake --build . --config Release
 
 
-
+# stuff to do to get needed dlls to the bin directory
 c:\Qt\Qt5.5.0\5.5\msvc2013\bin\windeployqt.exe e:\devel\kate\windows\install\kate\bin\kate.exe
 c:\Qt\Qt5.5.0\5.5\msvc2013\bin\windeployqt.exe e:\devel\kate\windows\install\kate\bin\kio_http_cache_cleaner.exe  # Qt5Network
-Qt5Scriptd.dll
-Qt5PrintSupportd.dll
+copy Qt5Scriptd.dll
+copy Qt5PrintSupportd.dll
+copy ...
 
 
 
-
-
+#Basically Copy Paste:
+mkdir build
+cd build
 "C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\Tools\VsDevCmd.bat"
 set PATH=%PATH%;C:\Qt\5.5\msvc2013\bin
 set PATH=%PATH%;"C:\Program Files (x86)\Git\bin"
