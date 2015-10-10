@@ -61,17 +61,6 @@ diff -urw kio-5.12.0/src/CMakeLists.txt KIO/src/CMakeLists.txt
  
  if(NOT WIN32)
    # arpa/nameser.h
-diff -urw kio-5.12.0/src/core/kfileitem.cpp KIO/src/core/kfileitem.cpp
---- kio-5.12.0/src/core/kfileitem.cpp	2015-07-05 12:06:31.000000000 +0300
-+++ KIO/src/core/kfileitem.cpp	2015-07-30 22:09:44.318788768 +0300
-@@ -30,6 +30,7 @@
- #include <QMimeDatabase>
- #include <QDebug>
- #include <qplatformdefs.h>
-+#include <QDataStream>
- 
- #include <klocalizedstring.h>
- #include <kdesktopfile.h>
 diff -urw kio-5.12.0/src/ioslaves/CMakeLists.txt KIO/src/ioslaves/CMakeLists.txt
 --- kio-5.12.0/src/ioslaves/CMakeLists.txt	2015-07-05 12:06:31.000000000 +0300
 +++ KIO/src/ioslaves/CMakeLists.txt	2015-07-30 22:09:44.350789035 +0300

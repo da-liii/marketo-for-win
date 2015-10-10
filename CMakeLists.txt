@@ -321,6 +321,7 @@ ExternalProject_Add(ConfigWidgets
 
 ExternalProject_Add(IconThemes
     URL http://download.kde.org/stable/frameworks/${KF5Ver}/kiconthemes-${KF5Ver}.0.zip
+    # this patch has been committed to master to be part of 5.16
     PATCH_COMMAND patch -p1 -t < ${CMAKE_SOURCE_DIR}/patches/kiconthemes_add_coreaddons_dep.diff
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
@@ -363,6 +364,7 @@ ExternalProject_Add(GlobalAccel
 
 ExternalProject_Add(XmlGui
     URL http://download.kde.org/stable/frameworks/${KF5Ver}/kxmlgui-${KF5Ver}.0.zip
+    # this patch has been committed to master to be part of 5.16
     PATCH_COMMAND patch -p1 -i ${CMAKE_SOURCE_DIR}/patches/kf5xmlgui-5.12.0-fix-win-build.diff
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
