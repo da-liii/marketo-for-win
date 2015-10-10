@@ -436,7 +436,6 @@ ExternalProject_Add(Parts
 
 ExternalProject_Add(TextEditor
     GIT_REPOSITORY "git://anongit.kde.org/ktexteditor"
-    #PATCH_COMMAND patch -p1 -i ${CMAKE_SOURCE_DIR}/patches/kf5texteditor-disable-kencodingfiledialog.diff
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -450,7 +449,6 @@ ExternalProject_Add(TextEditor
 
 ExternalProject_Add(Kate
     GIT_REPOSITORY "git://anongit.kde.org/kate"
-    #PATCH_COMMAND patch -p1 -i ${CMAKE_SOURCE_DIR}/patches/kate_make_compile.diff
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
