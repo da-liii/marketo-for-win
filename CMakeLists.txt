@@ -58,47 +58,6 @@ ExternalProject_Add(gettext-tools
     INSTALL_COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_BINARY_DIR}/gettext-tools-prefix/src/gettext-tools/bin ${CMAKE_INSTALL_PREFIX}/bin
 )
 
-ExternalProject_Add(LibXml2
-    URL ftp://xmlsoft.org/libxml2/libxml2-2.8.0.tar.gz
-    URL_MD5 c62106f02ee00b6437f0fb9d370c1093
-    PATCH_COMMAND patch -p1 -i ${CMAKE_SOURCE_DIR}/patches/libxml2-2.8.0-20110105.diff
-    CMAKE_ARGS
-        -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
-        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
-    UPDATE_COMMAND ""
-    ALWAYS 0
-    DEPENDS iconv zlib
-)
-
-ExternalProject_Add(LibXslt
-    URL ftp://xmlsoft.org/libxslt/libxslt-1.1.26.tar.gz
-    #URL_MD5 9667bf6f9310b957254fdcf6596600b7
-    # 4df177de629b2653db322bfb891afa3c0d1fa221
-    #  9667bf6f9310b957254fdcf6596600b7
-    PATCH_COMMAND patch -p1 -i ${CMAKE_CURRENT_SOURCE_DIR}/patches/libxslt-1.1.26-20101102.diff
-    CMAKE_ARGS
-        -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
-        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
-    UPDATE_COMMAND ""
-    ALWAYS 0
-    DEPENDS LibXml2
-)
-
-
-ExternalProject_Add(SharedMimeInfo
-    URL http://heap.kogmbh.net/downloads/k/shared-mime-info-1.0_WITH_glib-2.24.0.tar.bz2
-    URL_MD5 bd59d96aecb11d673634f6832496ee50
-    PATCH_COMMAND patch -p1 -i ${CMAKE_SOURCE_DIR}/patches/shared-mime-info-1.0.diff
-    CMAKE_ARGS
-        -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
-        -DGLIB_DIR=glib-2.24.0
-        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
-    UPDATE_COMMAND ""
-    ALWAYS 0
-    DEPENDS gettext LibXml2
-    BUILD_IN_SOURCE 1
-)
-
 
 
 ExternalProject_Add(Phonon4Qt5
@@ -137,7 +96,7 @@ ExternalProject_Add(Phonon4Qt5
 ############# KF5 LIBRARIES #################
 
 ExternalProject_Add(Config
-    URL http://download.kde.org/stable/frameworks/${KF5Ver}/kconfig-${KF5Ver}.0.zip
+    GIT_REPOSITORY "git://anongit.kde.org/kconfig"
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -147,7 +106,7 @@ ExternalProject_Add(Config
 )
 
 ExternalProject_Add(GuiAddons
-    URL http://download.kde.org/stable/frameworks/${KF5Ver}/kguiaddons-${KF5Ver}.0.zip
+    GIT_REPOSITORY "git://anongit.kde.org/kguiaddons"
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -157,7 +116,7 @@ ExternalProject_Add(GuiAddons
 )
 
 ExternalProject_Add(I18n
-    URL http://download.kde.org/stable/frameworks/${KF5Ver}/ki18n-${KF5Ver}.0.zip
+    GIT_REPOSITORY "git://anongit.kde.org/ki18n"
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -168,7 +127,7 @@ ExternalProject_Add(I18n
 )
 
 ExternalProject_Add(ItemViews
-    URL http://download.kde.org/stable/frameworks/${KF5Ver}/kitemviews-${KF5Ver}.0.zip
+    GIT_REPOSITORY "git://anongit.kde.org/kitemviews"
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -179,7 +138,7 @@ ExternalProject_Add(ItemViews
 
 
 ExternalProject_Add(Sonnet
-    URL http://download.kde.org/stable/frameworks/${KF5Ver}/sonnet-${KF5Ver}.0.zip
+    GIT_REPOSITORY "git://anongit.kde.org/sonnet"
      CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -189,7 +148,7 @@ ExternalProject_Add(Sonnet
 )
 
 ExternalProject_Add(WindowSystem
-    URL http://download.kde.org/stable/frameworks/${KF5Ver}/kwindowsystem-${KF5Ver}.0.zip
+    GIT_REPOSITORY "git://anongit.kde.org/kwindowsystem"
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -199,7 +158,7 @@ ExternalProject_Add(WindowSystem
 )
 
 ExternalProject_Add(WidgetsAddons
-    URL http://download.kde.org/stable/frameworks/${KF5Ver}/kwidgetsaddons-${KF5Ver}.0.zip
+    GIT_REPOSITORY "git://anongit.kde.org/kwidgetsaddons"
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -209,7 +168,7 @@ ExternalProject_Add(WidgetsAddons
 )
 
 ExternalProject_Add(Completion
-    URL http://download.kde.org/stable/frameworks/${KF5Ver}/kcompletion-${KF5Ver}.0.zip
+    GIT_REPOSITORY "git://anongit.kde.org/kcompletion"
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -219,7 +178,7 @@ ExternalProject_Add(Completion
 )
 
 ExternalProject_Add(DBusAddons
-    URL http://download.kde.org/stable/frameworks/${KF5Ver}/kdbusaddons-${KF5Ver}.0.zip
+    GIT_REPOSITORY "git://anongit.kde.org/kdbusaddons"
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -229,7 +188,7 @@ ExternalProject_Add(DBusAddons
 )
 
 ExternalProject_Add(Archive
-    URL http://download.kde.org/stable/frameworks/${KF5Ver}/karchive-${KF5Ver}.0.zip
+    GIT_REPOSITORY "git://anongit.kde.org/karchive"
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -240,32 +199,18 @@ ExternalProject_Add(Archive
 
 
 ExternalProject_Add(CoreAddons
-    URL http://download.kde.org/stable/frameworks/${KF5Ver}/kcoreaddons-${KF5Ver}.0.zip
+    GIT_REPOSITORY "git://anongit.kde.org/kcoreaddons"
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
         -Wno-dev
-    DEPENDS ecm SharedMimeInfo
-
-    # FIXME create a patch to make SharedMimeInfo optional!!! suggested by David
-    # just install the xml...
+    DEPENDS ecm
 )
 
 
-#  DISABLE fo now.....
-# ExternalProject_Add(DocTools
-#     URL http://download.kde.org/stable/frameworks/${KF5Ver}/kdoctools-${KF5Ver}.0.zip
-#     CMAKE_ARGS
-#         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
-#         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
-#         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
-#         -Wno-dev
-#     DEPENDS ecm Archive LibXslt LibXml2 DocBookXML4 DocBookXSL
-# )
-#
 ExternalProject_Add(JobWidgets
-    URL http://download.kde.org/stable/frameworks/${KF5Ver}/kjobwidgets-${KF5Ver}.0.zip
+    GIT_REPOSITORY "git://anongit.kde.org/kjobwidgets"
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -275,8 +220,7 @@ ExternalProject_Add(JobWidgets
 )
 
 ExternalProject_Add(Service
-    URL http://download.kde.org/stable/frameworks/${KF5Ver}/kservice-${KF5Ver}.0.zip
-    PATCH_COMMAND patch -p1 -i ${CMAKE_SOURCE_DIR}/patches/kf5service-disable-dockbook-syscoca-crash.diff
+    GIT_REPOSITORY "git://anongit.kde.org/kservice"
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -287,7 +231,7 @@ ExternalProject_Add(Service
 )
 
 ExternalProject_Add(Codecs
-    URL http://download.kde.org/stable/frameworks/${KF5Ver}/kcodecs-${KF5Ver}.0.zip
+    GIT_REPOSITORY "git://anongit.kde.org/kcodecs"
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -298,7 +242,7 @@ ExternalProject_Add(Codecs
 
 
 ExternalProject_Add(Crash
-    URL http://download.kde.org/stable/frameworks/${KF5Ver}/kcrash-${KF5Ver}.0.zip
+    GIT_REPOSITORY "git://anongit.kde.org/kcrash"
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -308,7 +252,7 @@ ExternalProject_Add(Crash
 )
 
 ExternalProject_Add(ConfigWidgets
-    URL http://download.kde.org/stable/frameworks/${KF5Ver}/kconfigwidgets-${KF5Ver}.0.zip
+    GIT_REPOSITORY "git://anongit.kde.org/kconfigwidgets"
     PATCH_COMMAND patch -p1 -i ${CMAKE_SOURCE_DIR}/patches/kf5configwidgets-disable-docktool-auth.diff
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
@@ -320,9 +264,7 @@ ExternalProject_Add(ConfigWidgets
 )
 
 ExternalProject_Add(IconThemes
-    URL http://download.kde.org/stable/frameworks/${KF5Ver}/kiconthemes-${KF5Ver}.0.zip
-    # this patch has been committed to master to be part of 5.16
-    PATCH_COMMAND patch -p1 -t < ${CMAKE_SOURCE_DIR}/patches/kiconthemes_add_coreaddons_dep.diff
+    GIT_REPOSITORY "git://anongit.kde.org/kiconthemes"
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -333,7 +275,7 @@ ExternalProject_Add(IconThemes
 
 
 ExternalProject_Add(TextWidgets
-    URL http://download.kde.org/stable/frameworks/${KF5Ver}/ktextwidgets-${KF5Ver}.0.zip
+    GIT_REPOSITORY "git://anongit.kde.org/ktextwidgets"
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -343,7 +285,7 @@ ExternalProject_Add(TextWidgets
 )
 
 ExternalProject_Add(Notifications
-    URL http://download.kde.org/stable/frameworks/${KF5Ver}/knotifications-${KF5Ver}.0.zip
+    GIT_REPOSITORY "git://anongit.kde.org/knotifications"
      CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -353,7 +295,7 @@ ExternalProject_Add(Notifications
 )
 
 ExternalProject_Add(GlobalAccel
-    URL http://download.kde.org/stable/frameworks/${KF5Ver}/kglobalaccel-${KF5Ver}.0.zip
+    GIT_REPOSITORY "git://anongit.kde.org/kglobalaccel"
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -363,9 +305,7 @@ ExternalProject_Add(GlobalAccel
 )
 
 ExternalProject_Add(XmlGui
-    URL http://download.kde.org/stable/frameworks/${KF5Ver}/kxmlgui-${KF5Ver}.0.zip
-    # this patch has been committed to master to be part of 5.16
-    PATCH_COMMAND patch -p1 -i ${CMAKE_SOURCE_DIR}/patches/kf5xmlgui-5.12.0-fix-win-build.diff
+    GIT_REPOSITORY "git://anongit.kde.org/kxmlgui"
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -375,7 +315,7 @@ ExternalProject_Add(XmlGui
 )
 
 ExternalProject_Add(Bookmarks
-    URL http://download.kde.org/stable/frameworks/${KF5Ver}/kbookmarks-${KF5Ver}.0.zip
+    GIT_REPOSITORY "git://anongit.kde.org/kbookmarks"
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -396,7 +336,7 @@ ExternalProject_Add(Bookmarks
 # )
 #
 ExternalProject_Add(KIO
-    URL http://download.kde.org/stable/frameworks/${KF5Ver}/kio-${KF5Ver}.0.zip
+    GIT_REPOSITORY "git://anongit.kde.org/kio"
     PATCH_COMMAND patch -p1 -i ${CMAKE_SOURCE_DIR}/patches/kf5kio-disable-doctools-solid-trash-help.diff
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
@@ -407,22 +347,9 @@ ExternalProject_Add(KIO
     #Wallet
 )
 
-ExternalProject_Add(Init
-    URL http://download.kde.org/stable/frameworks/${KF5Ver}/kinit-${KF5Ver}.0.zip
-    PATCH_COMMAND patch -p1 -i ${CMAKE_SOURCE_DIR}/patches/kf5init-disable-docktools-fix-compilation.diff
-    CMAKE_ARGS
-        -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
-        -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
-        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
-        -Wno-dev
-    DEPENDS ecm Service KIO I18n WindowSystem Crash Config
-)
-
-
-
 
 ExternalProject_Add(Parts
-    URL http://download.kde.org/stable/frameworks/${KF5Ver}/kparts-${KF5Ver}.0.zip
+    GIT_REPOSITORY "git://anongit.kde.org/kparts"
      CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}

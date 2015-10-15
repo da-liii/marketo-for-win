@@ -1,7 +1,8 @@
-diff -urw kconfigwidgets-5.12.0/CMakeLists.txt ConfigWidgets/CMakeLists.txt
---- kconfigwidgets-5.12.0/CMakeLists.txt	2015-07-05 11:55:00.000000000 +0300
-+++ ConfigWidgets/CMakeLists.txt	2015-07-30 14:09:04.354729297 +0300
-@@ -27,11 +27,11 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 0dc4064..21db006 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -27,7 +27,7 @@ ecm_setup_version(${KF5_VERSION} VARIABLE_PREFIX KCONFIGWIDGETS
                          PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF5ConfigWidgetsConfigVersion.cmake"
                          SOVERSION 5)
  
@@ -10,12 +11,7 @@ diff -urw kconfigwidgets-5.12.0/CMakeLists.txt ConfigWidgets/CMakeLists.txt
  find_package(KF5CoreAddons ${KF5_DEP_VERSION} REQUIRED)
  find_package(KF5Codecs ${KF5_DEP_VERSION} REQUIRED)
  find_package(KF5Config ${KF5_DEP_VERSION} REQUIRED)
--find_package(KF5DocTools ${KF5_DEP_VERSION} REQUIRED)
-+#find_package(KF5DocTools ${KF5_DEP_VERSION} REQUIRED)
- find_package(KF5GuiAddons ${KF5_DEP_VERSION} REQUIRED)
- find_package(KF5I18n ${KF5_DEP_VERSION} REQUIRED)
- find_package(KF5WidgetsAddons ${KF5_DEP_VERSION} REQUIRED)
-@@ -42,7 +42,7 @@
+@@ -42,7 +42,7 @@ remove_definitions(-DQT_NO_CAST_FROM_BYTEARRAY)
  add_definitions(-DTRANSLATION_DOMAIN=\"kconfigwidgets5\")
  if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
      ki18n_install(po)
@@ -24,18 +20,10 @@ diff -urw kconfigwidgets-5.12.0/CMakeLists.txt ConfigWidgets/CMakeLists.txt
  
      file(GLOB lang_dirs "po/*")
      foreach(lang_dir ${lang_dirs})
-@@ -52,7 +52,7 @@
-        endif()
-     endforeach()
- endif()
--add_subdirectory(docs)
-+#add_subdirectory(docs)
- add_subdirectory(src)
- add_subdirectory(tests)
- add_subdirectory(autotests)
-diff -urw kconfigwidgets-5.12.0/KF5ConfigWidgetsConfig.cmake.in ConfigWidgets/KF5ConfigWidgetsConfig.cmake.in
---- kconfigwidgets-5.12.0/KF5ConfigWidgetsConfig.cmake.in	2015-07-05 11:55:00.000000000 +0300
-+++ ConfigWidgets/KF5ConfigWidgetsConfig.cmake.in	2015-07-30 14:22:48.168508733 +0300
+diff --git a/KF5ConfigWidgetsConfig.cmake.in b/KF5ConfigWidgetsConfig.cmake.in
+index 9096da6..e49ec05 100644
+--- a/KF5ConfigWidgetsConfig.cmake.in
++++ b/KF5ConfigWidgetsConfig.cmake.in
 @@ -1,6 +1,6 @@
  @PACKAGE_INIT@
  
@@ -44,10 +32,11 @@ diff -urw kconfigwidgets-5.12.0/KF5ConfigWidgetsConfig.cmake.in ConfigWidgets/KF
  find_dependency(KF5Codecs "@KF5_DEP_VERSION@")
  find_dependency(KF5Config "@KF5_DEP_VERSION@")
  find_dependency(KF5WidgetsAddons "@KF5_DEP_VERSION@")
-diff -urw kconfigwidgets-5.12.0/src/CMakeLists.txt ConfigWidgets/src/CMakeLists.txt
---- kconfigwidgets-5.12.0/src/CMakeLists.txt	2015-07-05 11:55:00.000000000 +0300
-+++ ConfigWidgets/src/CMakeLists.txt	2015-07-30 14:09:04.594730971 +0300
-@@ -5,7 +5,7 @@
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 10862c6..23835d0 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -5,7 +5,7 @@ set(kconfigwidgets_SRCS
    kconfigdialog.cpp
    kconfigviewstatesaver.cpp
    kconfigdialogmanager.cpp
@@ -56,7 +45,7 @@ diff -urw kconfigwidgets-5.12.0/src/CMakeLists.txt ConfigWidgets/src/CMakeLists.
    khelpclient.cpp
    klanguagebutton.cpp
    kpastetextaction.cpp
-@@ -25,7 +25,7 @@
+@@ -25,7 +25,7 @@ target_link_libraries(KF5ConfigWidgets
      KF5::Codecs # KCodecActions uses KCharsets, KEncodingProber
      KF5::WidgetsAddons # For K*Action, KPage*, KViewStateSerializer, KAcceleratorManager, K*GuiItem
      KF5::ConfigGui # KStandardAction uses KStandardShortcut
@@ -65,7 +54,7 @@ diff -urw kconfigwidgets-5.12.0/src/CMakeLists.txt ConfigWidgets/src/CMakeLists.
    PRIVATE
      Qt5::DBus # KPasteTextAction talks to Klipper via DBus
      KF5::CoreAddons # KCModule uses KAboutData, KTipDialog uses KRandom
-@@ -46,7 +46,7 @@
+@@ -46,7 +46,7 @@ ecm_generate_headers(KConfigWidgets_HEADERS
    KConfigDialog
    KConfigViewStateSaver
    KConfigDialogManager

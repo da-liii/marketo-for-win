@@ -1,7 +1,8 @@
-diff -urw kio-5.12.0/CMakeLists.txt KIO/CMakeLists.txt
---- kio-5.12.0/CMakeLists.txt	2015-07-05 12:06:31.000000000 +0300
-+++ KIO/CMakeLists.txt	2015-07-31 19:51:25.254638899 +0300
-@@ -40,8 +40,8 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index cfea7b2..e5ca0d5 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -40,8 +40,8 @@ find_package(KF5CoreAddons ${KF5_DEP_VERSION} REQUIRED)
  find_package(KF5DBusAddons ${KF5_DEP_VERSION} REQUIRED)
  find_package(KF5I18n ${KF5_DEP_VERSION} REQUIRED)
  find_package(KF5Service ${KF5_DEP_VERSION} REQUIRED)
@@ -12,7 +13,7 @@ diff -urw kio-5.12.0/CMakeLists.txt KIO/CMakeLists.txt
  
  if (NOT KIOCORE_ONLY)
  find_package(KF5Bookmarks ${KF5_DEP_VERSION} REQUIRED)
-@@ -82,7 +82,7 @@
+@@ -82,7 +82,7 @@ endif()
  add_definitions(-DTRANSLATION_DOMAIN=\"kio5\")
  if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
      ki18n_install(po)
@@ -21,7 +22,7 @@ diff -urw kio-5.12.0/CMakeLists.txt KIO/CMakeLists.txt
  endif()
  if (KF5DocTools_FOUND)
  add_subdirectory(docs)
-@@ -92,7 +92,7 @@
+@@ -92,7 +92,7 @@ add_subdirectory(src)
  add_subdirectory(autotests)
  
  if (NOT KIOCORE_ONLY)
@@ -30,10 +31,11 @@ diff -urw kio-5.12.0/CMakeLists.txt KIO/CMakeLists.txt
  endif()
  
  # create a Config.cmake and a ConfigVersion.cmake file and install them
-diff -urw kio-5.12.0/KF5KIOConfig.cmake.in KIO/KF5KIOConfig.cmake.in
---- kio-5.12.0/KF5KIOConfig.cmake.in	2015-07-05 12:06:31.000000000 +0300
-+++ KIO/KF5KIOConfig.cmake.in	2015-07-31 19:57:30.806453868 +0300
-@@ -14,7 +14,7 @@
+diff --git a/KF5KIOConfig.cmake.in b/KF5KIOConfig.cmake.in
+index 0577c9a..eebdf98 100644
+--- a/KF5KIOConfig.cmake.in
++++ b/KF5KIOConfig.cmake.in
+@@ -14,7 +14,7 @@ find_dependency(KF5Bookmarks "@KF5_DEP_VERSION@")
  find_dependency(KF5Completion "@KF5_DEP_VERSION@")
  find_dependency(KF5ItemViews "@KF5_DEP_VERSION@")
  find_dependency(KF5JobWidgets "@KF5_DEP_VERSION@")
@@ -42,10 +44,11 @@ diff -urw kio-5.12.0/KF5KIOConfig.cmake.in KIO/KF5KIOConfig.cmake.in
  find_dependency(KF5XmlGui "@KF5_DEP_VERSION@")
  endif()
  
-diff -urw kio-5.12.0/src/CMakeLists.txt KIO/src/CMakeLists.txt
---- kio-5.12.0/src/CMakeLists.txt	2015-07-05 12:06:31.000000000 +0300
-+++ KIO/src/CMakeLists.txt	2015-07-31 19:47:17.442650596 +0300
-@@ -8,12 +8,12 @@
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index f65ad8e..20f5ac1 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -8,12 +8,12 @@ add_subdirectory(kssld)
  add_subdirectory(kioslave)
  
  if (NOT KIOCORE_ONLY)
@@ -58,12 +61,13 @@ diff -urw kio-5.12.0/src/CMakeLists.txt KIO/src/CMakeLists.txt
  add_subdirectory(urifilters)
 -add_subdirectory(kcms)
 +#add_subdirectory(kcms)
+ add_subdirectory(new_file_templates)
  
  if(NOT WIN32)
-   # arpa/nameser.h
-diff -urw kio-5.12.0/src/ioslaves/CMakeLists.txt KIO/src/ioslaves/CMakeLists.txt
---- kio-5.12.0/src/ioslaves/CMakeLists.txt	2015-07-05 12:06:31.000000000 +0300
-+++ KIO/src/ioslaves/CMakeLists.txt	2015-07-30 22:09:44.350789035 +0300
+diff --git a/src/ioslaves/CMakeLists.txt b/src/ioslaves/CMakeLists.txt
+index 36f1ab0..c4ad8fb 100644
+--- a/src/ioslaves/CMakeLists.txt
++++ b/src/ioslaves/CMakeLists.txt
 @@ -1,10 +1,10 @@
  
  add_subdirectory( file )
@@ -77,9 +81,10 @@ diff -urw kio-5.12.0/src/ioslaves/CMakeLists.txt KIO/src/ioslaves/CMakeLists.txt
 +#add_subdirectory( trash )
  add_subdirectory( protocols )
  
-diff -urw kio-5.12.0/src/urifilters/CMakeLists.txt KIO/src/urifilters/CMakeLists.txt
---- kio-5.12.0/src/urifilters/CMakeLists.txt	2015-07-05 12:06:31.000000000 +0300
-+++ KIO/src/urifilters/CMakeLists.txt	2015-07-31 19:45:03.942656898 +0300
+diff --git a/src/urifilters/CMakeLists.txt b/src/urifilters/CMakeLists.txt
+index a3d7eb1..c061fc5 100644
+--- a/src/urifilters/CMakeLists.txt
++++ b/src/urifilters/CMakeLists.txt
 @@ -1,4 +1,4 @@
  add_subdirectory(localdomain)
 -add_subdirectory(ikws)

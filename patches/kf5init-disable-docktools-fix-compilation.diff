@@ -1,32 +1,8 @@
-diff -urw kinit-5.12.0/CMakeLists.txt Init/CMakeLists.txt
---- kinit-5.12.0/CMakeLists.txt	2015-07-05 12:06:01.000000000 +0300
-+++ Init/CMakeLists.txt	2015-07-30 13:14:57.780553164 +0300
-@@ -49,7 +49,7 @@
- find_package(KF5WindowSystem ${KF5_DEP_VERSION} REQUIRED)
- find_package(KF5Crash ${KF5_DEP_VERSION} REQUIRED)
- find_package(KF5Config ${KF5_DEP_VERSION} REQUIRED)
--find_package(KF5DocTools ${KF5_DEP_VERSION} REQUIRED)
-+#find_package(KF5DocTools ${KF5_DEP_VERSION} REQUIRED)
- 
- if (NOT WIN32)
- find_package(Libcap)
-@@ -71,10 +71,10 @@
- add_definitions(-DTRANSLATION_DOMAIN=\"kinit5\")
- if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
-     ki18n_install(po)
--    kdoctools_install(po)
-+    #kdoctools_install(po)
- endif()
- add_subdirectory(src)
--add_subdirectory(docs)
-+#add_subdirectory(docs)
- add_subdirectory(tests)
- 
- install( FILES
-diff -urw kinit-5.12.0/src/klauncher/CMakeLists.txt Init/src/klauncher/CMakeLists.txt
---- kinit-5.12.0/src/klauncher/CMakeLists.txt	2015-07-05 12:06:01.000000000 +0300
-+++ Init/src/klauncher/CMakeLists.txt	2015-07-30 13:31:47.815366666 +0300
-@@ -17,7 +17,7 @@
+diff --git a/src/klauncher/CMakeLists.txt b/src/klauncher/CMakeLists.txt
+index 746edfa..e2bd00e 100644
+--- a/src/klauncher/CMakeLists.txt
++++ b/src/klauncher/CMakeLists.txt
+@@ -17,7 +17,7 @@ kf5_add_kdeinit_executable(klauncher NOGUI ${klauncher_SRCS})
  set_target_properties(kdeinit_klauncher PROPERTIES DEFINE_SYMBOL MAKE_KLAUNCHER)
  target_link_libraries(kdeinit_klauncher ${X11_LIBRARIES}
     KF5::KIOCore # KIO::ConnectionServer
@@ -35,9 +11,10 @@ diff -urw kinit-5.12.0/src/klauncher/CMakeLists.txt Init/src/klauncher/CMakeList
     KF5::Crash  # sig_handler
     KF5::WindowSystem # KStartupInfo + fixx11
     KF5::I18n   # i18n()
-diff -urw kinit-5.12.0/src/klauncher/klauncher.cpp Init/src/klauncher/klauncher.cpp
---- kinit-5.12.0/src/klauncher/klauncher.cpp	2015-07-05 12:06:01.000000000 +0300
-+++ Init/src/klauncher/klauncher.cpp	2015-07-30 13:30:43.950965382 +0300
+diff --git a/src/klauncher/klauncher.cpp b/src/klauncher/klauncher.cpp
+index 8b3d343..500a5b3 100644
+--- a/src/klauncher/klauncher.cpp
++++ b/src/klauncher/klauncher.cpp
 @@ -50,7 +50,7 @@
  #include <kpluginloader.h> // to find kioslave modules
  #include <kprotocolmanager.h>
