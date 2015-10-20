@@ -1,28 +1,17 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index cfea7b2..e5ca0d5 100644
+index f61b210..2d98d66 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -40,8 +40,8 @@ find_package(KF5CoreAddons ${KF5_DEP_VERSION} REQUIRED)
- find_package(KF5DBusAddons ${KF5_DEP_VERSION} REQUIRED)
+@@ -41,7 +41,7 @@ find_package(KF5DBusAddons ${KF5_DEP_VERSION} REQUIRED)
  find_package(KF5I18n ${KF5_DEP_VERSION} REQUIRED)
  find_package(KF5Service ${KF5_DEP_VERSION} REQUIRED)
--find_package(KF5DocTools ${KF5_DEP_VERSION} REQUIRED)
+ find_package(KF5DocTools ${KF5_DEP_VERSION})
 -find_package(KF5Solid ${KF5_DEP_VERSION} REQUIRED) # for kio_trash
-+#find_package(KF5DocTools ${KF5_DEP_VERSION} REQUIRED)
 +#find_package(KF5Solid ${KF5_DEP_VERSION} REQUIRED) # for kio_trash
  
  if (NOT KIOCORE_ONLY)
  find_package(KF5Bookmarks ${KF5_DEP_VERSION} REQUIRED)
-@@ -82,7 +82,7 @@ endif()
- add_definitions(-DTRANSLATION_DOMAIN=\"kio5\")
- if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
-     ki18n_install(po)
--    kdoctools_install(po)
-+    #kdoctools_install(po)
- endif()
- if (KF5DocTools_FOUND)
- add_subdirectory(docs)
-@@ -92,7 +92,7 @@ add_subdirectory(src)
+@@ -103,7 +103,7 @@ add_subdirectory(src)
  add_subdirectory(autotests)
  
  if (NOT KIOCORE_ONLY)

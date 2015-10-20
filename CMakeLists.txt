@@ -11,13 +11,6 @@ include(ExternalProject)
 
 ############# EXTERNAL LIBRARIES #################
 
-ExternalProject_Add(ecm
-    URL http://download.kde.org/stable/frameworks/${KF5Ver}/extra-cmake-modules-${KF5Ver}.0.zip
-    CMAKE_ARGS
-        -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
-        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
-)
-
 ExternalProject_Add(zlib
     URL http://downloads.sourceforge.net/sourceforge/libpng/zlib-1.2.8.tar.gz
     PATCH_COMMAND patch -p1 -t < ${CMAKE_SOURCE_DIR}/patches/zlib-1.2.8-20130901.diff
@@ -59,41 +52,14 @@ ExternalProject_Add(gettext-tools
 )
 
 
+############# KF5 LIBRARIES #################
 
-ExternalProject_Add(Phonon4Qt5
-    URL http://download.kde.org/stable/phonon/4.7.2/phonon-4.7.2.tar.xz
-    URL_MD5 a8b722a11a301fc2cda7ff8228209531
-    # patch is applied upstream in for the next release from master as of (2015-10-10)
-    PATCH_COMMAND patch -p1 -t < ${CMAKE_SOURCE_DIR}/patches/Phonon4Qt5_4.7.2_fix_win_build.diff
+ExternalProject_Add(ecm
+    GIT_REPOSITORY "git://anongit.kde.org/extra-cmake-modules"
     CMAKE_ARGS
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
-        -DPHONON_BUILD_EXAMPLES=OFF
-        -DPHONON_BUILD_TESTS=OFF
-        -DPHONON_INSTALL_QT_EXTENSIONS_INTO_SYSTEM_QT=ON
-        -DPHONON_BUILD_PHONON4QT5=ON
-        -DPHONON_NO_DBUS=ON
-    DEPENDS ecm
 )
-
-
-# ExternalProject_Add(DBus
-#     URL http://dbus.freedesktop.org/releases/dbus/dbus-1.8.4.tar.gz
-#     #PATCH_COMMAND patch -p1 -t < ${CMAKE_SOURCE_DIR}/patches/dbus-qt5.diff  ${CMAKE_SOURCE_DIR}/patches/dbus_dont_include_afxres.diff
-#     CMAKE_ARGS
-#         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
-#         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
-#         -DPHONON_BUILD_EXAMPLES=OFF
-#         -DPHONON_BUILD_TESTS=OFF
-#         -DPHONON_INSTALL_QT_EXTENSIONS_INTO_SYSTEM_QT=ON
-#         -DPHONON_BUILD_PHONON4QT5=ON
-#         -DPHONON_NO_DBUS=ON
-#     DEPENDS ecm
-# )
-
-
-
-############# KF5 LIBRARIES #################
 
 ExternalProject_Add(Config
     GIT_REPOSITORY "git://anongit.kde.org/kconfig"
@@ -284,16 +250,6 @@ ExternalProject_Add(TextWidgets
     DEPENDS ecm Completion Config ConfigWidgets I18n IconThemes Service WidgetsAddons WindowSystem Sonnet
 )
 
-ExternalProject_Add(Notifications
-    GIT_REPOSITORY "git://anongit.kde.org/knotifications"
-     CMAKE_ARGS
-        -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
-        -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
-        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
-        -Wno-dev
-   DEPENDS ecm WindowSystem Service Config IconThemes Codecs CoreAddons Phonon4Qt5
-)
-
 ExternalProject_Add(GlobalAccel
     GIT_REPOSITORY "git://anongit.kde.org/kglobalaccel"
     CMAKE_ARGS
@@ -324,17 +280,35 @@ ExternalProject_Add(Bookmarks
     DEPENDS ecm Config CoreAddons Codecs ConfigWidgets IconThemes WidgetsAddons XmlGui
 )
 
-# ExternalProject_Add(Wallet DISABLE for now
-#     URL http://download.kde.org/stable/frameworks/${KF5Ver}/kwallet-${KF5Ver}.0.zip
-#     #PATCH_COMMAND patch -p1 -i ${CMAKE_SOURCE_DIR}/patches/
-#     CMAKE_ARGS
-#         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
-#         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
-#         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
-#         -Wno-dev
-#     DEPENDS ecm
-# )
-#
+ExternalProject_Add(ThreadWeaver
+    GIT_REPOSITORY "git://anongit.kde.org/threadweaver"
+    CMAKE_ARGS
+        -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
+        -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
+        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+        -Wno-dev
+    DEPENDS ecm
+)
+
+ExternalProject_Add(ItemModels
+    GIT_REPOSITORY "git://anongit.kde.org/kitemmodels"
+    CMAKE_ARGS
+        -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
+        -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
+        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+        -Wno-dev
+    DEPENDS ecm
+)
+
+ExternalProject_Add(Attica
+    GIT_REPOSITORY "git://anongit.kde.org/attica"
+    CMAKE_ARGS
+        -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
+        -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
+        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+        -Wno-dev
+    DEPENDS ecm
+)
 ExternalProject_Add(KIO
     GIT_REPOSITORY "git://anongit.kde.org/kio"
     PATCH_COMMAND patch -p1 -i ${CMAKE_SOURCE_DIR}/patches/kf5kio-disable-doctools-solid-trash-help.diff
@@ -347,6 +321,16 @@ ExternalProject_Add(KIO
     #Wallet
 )
 
+ExternalProject_Add(NewStuff
+    GIT_REPOSITORY "git://anongit.kde.org/knewstuff"
+    CMAKE_ARGS
+        -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
+        -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
+        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+        -Wno-dev
+    DEPENDS ecm Attica Archive Completion Config CoreAddons I18n IconThemes KIO ItemViews Service TextWidgets WidgetsAddons XmlGui
+)
+
 
 ExternalProject_Add(Parts
     GIT_REPOSITORY "git://anongit.kde.org/kparts"
@@ -356,7 +340,7 @@ ExternalProject_Add(Parts
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
         -Wno-dev
     #INSTALL_COMMAND jom install ALWAYS 0 -j4
-   DEPENDS ecm Config CoreAddons I18n IconThemes KIO JobWidgets Notifications Service TextWidgets WidgetsAddons XmlGui
+   DEPENDS ecm Config CoreAddons I18n IconThemes KIO JobWidgets Service TextWidgets WidgetsAddons XmlGui
 )
 
 
@@ -381,9 +365,8 @@ ExternalProject_Add(Kate
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
         -Wno-dev
-        INSTALL_COMMAND jom install ALWAYS 1 -j4
-    DEPENDS ecm Config GuiAddons I18n JobWidgets KIO Parts TextEditor WindowSystem XmlGui IconThemes
-    # DocTools Init Activities
+        #INSTALL_COMMAND jom install ALWAYS 1 -j4
+    DEPENDS ecm Config GuiAddons I18n JobWidgets KIO Parts TextEditor WindowSystem XmlGui IconThemes ItemViews ItemModels NewStuff
 )
 
 
