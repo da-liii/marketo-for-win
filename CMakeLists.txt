@@ -217,16 +217,24 @@ ExternalProject_Add(Crash
     DEPENDS ecm CoreAddons WindowSystem
 )
 
-ExternalProject_Add(ConfigWidgets
-    GIT_REPOSITORY "git://anongit.kde.org/kconfigwidgets"
-    PATCH_COMMAND patch -p1 -i ${CMAKE_SOURCE_DIR}/patches/kf5configwidgets-disable-docktool-auth.diff
+ExternalProject_Add(Auth
+    GIT_REPOSITORY "git://anongit.kde.org/kauth"
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
         -Wno-dev
-    DEPENDS ecm CoreAddons Codecs Config GuiAddons I18n WidgetsAddons
-    #Auth DocTools
+    DEPENDS ecm CoreAddons
+)
+
+ExternalProject_Add(ConfigWidgets
+    GIT_REPOSITORY "git://anongit.kde.org/kconfigwidgets"
+    CMAKE_ARGS
+        -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
+        -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
+        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+        -Wno-dev
+    DEPENDS ecm CoreAddons Codecs Config GuiAddons I18n WidgetsAddons Auth
 )
 
 ExternalProject_Add(IconThemes
@@ -309,15 +317,23 @@ ExternalProject_Add(Attica
         -Wno-dev
     DEPENDS ecm
 )
-ExternalProject_Add(KIO
-    GIT_REPOSITORY "git://anongit.kde.org/kio"
-    PATCH_COMMAND patch -p1 -i ${CMAKE_SOURCE_DIR}/patches/kf5kio-disable-doctools-solid-trash-help.diff
+ExternalProject_Add(Solid
+    GIT_REPOSITORY "git://anongit.kde.org/solid"
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
         -Wno-dev
-    DEPENDS ecm Archive Config CoreAddons DBusAddons Service Bookmarks Completion ConfigWidgets IconThemes ItemViews JobWidgets WidgetsAddons WindowSystem
+    DEPENDS ecm
+)
+ExternalProject_Add(KIO
+    GIT_REPOSITORY "git://anongit.kde.org/kio"
+    CMAKE_ARGS
+        -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
+        -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
+        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+        -Wno-dev
+    DEPENDS ecm Archive Config CoreAddons DBusAddons Service Bookmarks Completion ConfigWidgets IconThemes ItemViews JobWidgets WidgetsAddons WindowSystem Solid
     #Wallet
 )
 
