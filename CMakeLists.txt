@@ -386,6 +386,14 @@ ExternalProject_Add(Kate
 )
 
 
+ExternalProject_Add(IconRcc
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/breeze-dl
+    CMAKE_ARGS
+        -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
+        -Wno-dev
+    DEPENDS Kate
+)
+
 
 
 
