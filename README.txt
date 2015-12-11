@@ -28,7 +28,7 @@ windeployqt.exe ..\install\bin\kio_http_cache_cleaner.exe
 copy Qt5Scriptd.dll
 copy Qt5PrintSupportd.dll
 
-Add qt.config
+Add qt.conf
 [Paths]
 Prefix=..
 Plugins=lib/plugins
