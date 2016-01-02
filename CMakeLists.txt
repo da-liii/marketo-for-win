@@ -373,6 +373,18 @@ ExternalProject_Add(TextEditor
 
     )
 
+ExternalProject_Add(BreezeIcons
+    GIT_REPOSITORY "git://anongit.kde.org/breeze-icons"
+    CMAKE_ARGS
+        -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
+        -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
+        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+        -Wno-dev
+    #INSTALL_COMMAND jom install ALWAYS 0 -j4
+    DEPENDS ecm
+
+    )
+
 
 ExternalProject_Add(Kate
     GIT_REPOSITORY "git://anongit.kde.org/kate"
