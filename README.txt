@@ -8,6 +8,13 @@ install perl: http://strawberryperl.com/
       1) disable "patch.exe" from Strawberry perl (C:\Strawberry\c\bin\patch.exe)
       2) rename Staberry\c\include (wrong libxml version)
 
+install nsis: http://sourceforge.net/projects/nsis/files/latest/download?source=directory
+
+Optionally install
+An nsis editor to change the install script: http://hmne.sourceforge.net/
+
+
+
 # visual studio envs
 "C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\Tools\VsDevCmd.bat"
 
@@ -17,8 +24,10 @@ set PATH=%PATH%;C:\Qt\Qt5.5.0\5.5\msvc2013\bin
 # Git and patch.exe
 set PATH=%PATH%;"C:\Program Files (x86)\Git\bin"
 
+# Run Cmake
 cmake -G "NMake Makefiles JOM" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=..\install\kate ..\
 
+# build
 cmake --build . --config Release
 
 

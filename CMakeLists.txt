@@ -13,6 +13,7 @@ include(ExternalProject)
 
 ExternalProject_Add(zlib
     URL http://downloads.sourceforge.net/sourceforge/libpng/zlib-1.2.8.tar.gz
+    URL_HASH SHA256=36658cb768a54c1d4dec43c3116c27ed893e88b02ecfcb44f2166f9c0b7f2a0d
     PATCH_COMMAND patch -p1 -t < ${CMAKE_SOURCE_DIR}/patches/zlib-1.2.8-20130901.diff
     CMAKE_ARGS
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -21,6 +22,7 @@ ExternalProject_Add(zlib
 
 ExternalProject_Add(libzip
     URL http://www.nih.at/libzip/libzip-0.11.1.tar.xz
+    URL_HASH SHA256=65338688f157784c80824d222f779505416d066c701409f6aef6b886bcd856a4
     PATCH_COMMAND patch -p1 -t < ${CMAKE_SOURCE_DIR}/patches/libzip-0.11.1-20130907.diff
     CMAKE_ARGS
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -30,6 +32,7 @@ ExternalProject_Add(libzip
 
 ExternalProject_Add(iconv
     URL https://github.com/win-iconv/win-iconv/archive/0.0.6.tar.gz
+    URL_HASH SHA256=d464bbe0410f72b09f301bead9f1cf091e6aa15e97323961ecb9242c0e7f609b
     CMAKE_ARGS
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
@@ -37,6 +40,7 @@ ExternalProject_Add(iconv
 
 ExternalProject_Add(gettext
     URL http://ftp.gnu.org/pub/gnu/gettext/gettext-0.18.tar.gz
+    URL_HASH SHA256=02342c1de18c03c601f8b91cbd896b70486a4b945bd816f34541e0d7b5a96fe5
     PATCH_COMMAND patch -p1 -t < ${CMAKE_SOURCE_DIR}/patches/gettext-0.18-20150423.diff
     CMAKE_ARGS
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -46,9 +50,18 @@ ExternalProject_Add(gettext
 
 ExternalProject_Add(gettext-tools
     URL http://downloads.sourceforge.net/sourceforge/kde-windows/gettext-tools-0.18.1.1_1-bin.tar.bz2
+    URL_HASH SHA256=844f3da9dac4a28dde290896fb552917947606c508e3b1f4fc0a479de90167b5
     CONFIGURE_COMMAND ""
     BUILD_COMMAND ""
     INSTALL_COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_BINARY_DIR}/gettext-tools-prefix/src/gettext-tools/bin ${CMAKE_INSTALL_PREFIX}/bin
+)
+
+ExternalProject_Add(png2ico
+    URL http://www.winterdrache.de/freeware/png2ico/data/png2ico-win-2002-12-08.zip
+    URL_HASH SHA256=09cafe3f62a7827634ab4fcba630774ab0984bbffaab1489bd6fbb21c30818cb
+    CONFIGURE_COMMAND ""
+    BUILD_COMMAND ""
+    INSTALL_COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/png2ico-prefix/src/png2ico/png2ico.exe ${CMAKE_INSTALL_PREFIX}/bin/
 )
 
 
@@ -394,12 +407,20 @@ ExternalProject_Add(Kate
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
         -Wno-dev
         #INSTALL_COMMAND jom install ALWAYS 1 -j4
-    DEPENDS ecm Config GuiAddons I18n JobWidgets KIO Parts TextEditor WindowSystem XmlGui IconThemes ItemViews ItemModels NewStuff
+    DEPENDS ecm Config GuiAddons I18n JobWidgets KIO Parts TextEditor WindowSystem XmlGui IconThemes ItemViews ItemModels NewStuff png2ico
 )
 
 
 ExternalProject_Add(IconRcc
-    SOURCE_DIR ${CMAKE_SOURCE_DIR}/breeze-dl
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/icon-rcc
+    CMAKE_ARGS
+        -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
+        -Wno-dev
+    DEPENDS Kate
+)
+
+ExternalProject_Add(Deploy
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/deploy
     CMAKE_ARGS
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
         -Wno-dev
@@ -407,8 +428,13 @@ ExternalProject_Add(IconRcc
 )
 
 
-
-
+ExternalProject_Add(Installer
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/installer
+    CMAKE_ARGS
+        -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
+        -Wno-dev
+    DEPENDS Deploy IconRcc
+)
 
 
 
