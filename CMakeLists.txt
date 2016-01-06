@@ -432,7 +432,9 @@ ExternalProject_Add(Installer
     SOURCE_DIR ${CMAKE_SOURCE_DIR}/installer
     CMAKE_ARGS
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
+        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
         -Wno-dev
+    INSTALL_COMMAND echo done
     DEPENDS Deploy IconRcc
 )
 

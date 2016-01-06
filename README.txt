@@ -19,10 +19,13 @@ An nsis editor to change the install script: http://hmne.sourceforge.net/
 "C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\Tools\VsDevCmd.bat"
 
 # Qt
-set PATH=%PATH%;C:\Qt\Qt5.5.0\5.5\msvc2013\bin
+set PATH=%PATH%;C:\Qt\5.5\msvc2013\bin
 
 # Git and patch.exe
 set PATH=%PATH%;"C:\Program Files (x86)\Git\bin"
+
+# NSIS
+set PATH=%PATH%;"C:\Program Files (x86)\NSIS"
 
 # Run Cmake
 cmake -G "NMake Makefiles JOM" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=..\install\kate ..\
@@ -31,25 +34,15 @@ cmake -G "NMake Makefiles JOM" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX
 cmake --build . --config Release
 
 
-# stuff to do to get needed dlls to the bin directory
-windeployqt.exe ..\install\bin\kate.exe
-windeployqt.exe ..\install\bin\kio_http_cache_cleaner.exe
-copy Qt5Scriptd.dll
-copy Qt5PrintSupportd.dll
-
-Add qt.conf
-[Paths]
-Prefix=..
-Plugins=lib/plugins
-
-
-
 #Basically Copy Paste:
 mkdir build
 cd build
 "C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\Tools\VsDevCmd.bat"
 set PATH=%PATH%;C:\Qt\5.5\msvc2013\bin
 set PATH=%PATH%;"C:\Program Files (x86)\Git\bin"
+set PATH=%PATH%;"C:\Program Files (x86)\NSIS"
+
+# Debug
 cmake -G "NMake Makefiles JOM" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=..\install ..\
 cmake --build . --config Debug
 
