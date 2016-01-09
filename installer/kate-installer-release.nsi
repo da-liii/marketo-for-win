@@ -114,6 +114,7 @@ Section "Kate" SEC01
   File "bin\libGLESV2.dll"
   File "bin\libintl.dll"
   File "bin\opengl32sw.dll"
+  File "bin\vcredist_x86.exe"
   SetOutPath "$INSTDIR\bin\platforms"
   File "bin\platforms\qwindows.dll"
   SetOutPath "$INSTDIR\bin\printsupport"
