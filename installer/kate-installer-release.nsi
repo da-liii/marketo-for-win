@@ -218,6 +218,10 @@ Section -Post
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayVersion" "${PRODUCT_VERSION}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "URLInfoAbout" "${PRODUCT_WEB_SITE}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Publisher" "${PRODUCT_PUBLISHER}"
+
+  WriteRegStr HKCR "*\shell\EditWithKate" "" "Edit with Kate"
+  WriteRegStr HKCR "*\shell\EditWithKate\command" "" '"$INSTDIR\bin\kate.exe" "%V"'
+
 SectionEnd
 
 
@@ -359,5 +363,7 @@ Section Uninstall
 
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
   DeleteRegKey HKLM "${PRODUCT_DIR_REGKEY}"
+  DeleteRegKey HKCR "*\shell\EditWithKate"
+
   SetAutoClose true
 SectionEnd
