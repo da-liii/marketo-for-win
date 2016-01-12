@@ -20,7 +20,7 @@
 ; Welcome page
 !insertmacro MUI_PAGE_WELCOME
 ; License page
-!insertmacro MUI_PAGE_LICENSE "bin\qt.conf"
+!insertmacro MUI_PAGE_LICENSE "bin\COPYING.GPL2"
 ; Directory page
 !insertmacro MUI_PAGE_DIRECTORY
 ; Instfiles page
@@ -199,6 +199,8 @@ Section "Kate" SEC01
   File "lib\plugins\ktexteditor\textfilterplugin.dll"
   SetOutPath "$INSTDIR\lib\plugins"
   File "lib\plugins\spellcheckplugin.dll"
+  SetOutPath "$INSTDIR"
+  File "bin\COPYING.GPL2"
   ExecWait "$INSTDIR\bin\vcredist_x86.exe"
 SectionEnd
 
@@ -238,6 +240,7 @@ FunctionEnd
 Section Uninstall
   Delete "$INSTDIR\${PRODUCT_NAME}.url"
   Delete "$INSTDIR\uninst.exe"
+  Delete "$INSTDIR\COPYING.GPL2"
   Delete "$INSTDIR\lib\plugins\spellcheckplugin.dll"
   Delete "$INSTDIR\lib\plugins\ktexteditor\textfilterplugin.dll"
   Delete "$INSTDIR\lib\plugins\ktexteditor\tabswitcherplugin.dll"
@@ -360,6 +363,8 @@ Section Uninstall
   RMDir "$INSTDIR\bin\iconengines"
   RMDir "$INSTDIR\bin\bearer"
   RMDir "$INSTDIR\bin"
+  RMDir "$INSTDIR\lib"
+  RMDir "$INSTDIR"
 
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
   DeleteRegKey HKLM "${PRODUCT_DIR_REGKEY}"
