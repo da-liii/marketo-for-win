@@ -12,6 +12,12 @@ add_custom_command(OUTPUT breeze.rcc
     COMMAND ${CMAKE_COMMAND} -E copy actions/16/window-close.svg actions/16/dialog-close.svg
     COMMAND ${CMAKE_COMMAND} -E copy actions/22/window-close.svg actions/22/dialog-close.svg
     COMMAND ${CMAKE_COMMAND} -E copy actions/24/window-close.svg actions/24/dialog-close.svg
+
+    COMMAND ${CMAKE_COMMAND} -E copy mimetypes/16/application-x-executable.svg mimetypes/16/application-x-ms-dos-executable.svg
+    COMMAND ${CMAKE_COMMAND} -E copy mimetypes/22/application-x-executable.svg mimetypes/22/application-x-ms-dos-executable.svg
+    COMMAND ${CMAKE_COMMAND} -E copy mimetypes/32/application-x-executable.svg mimetypes/32/application-x-ms-dos-executable.svg
+    COMMAND ${CMAKE_COMMAND} -E copy mimetypes/64/application-x-executable.svg mimetypes/64/application-x-ms-dos-executable.svg
+
     COMMAND rcc -project -o icons.qrc
     COMMAND rcc -binary -o ${CMAKE_BINARY_DIR}/breeze.rcc -root /icons/breeze icons.qrc
 
