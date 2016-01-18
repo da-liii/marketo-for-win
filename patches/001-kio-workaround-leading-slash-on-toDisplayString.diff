@@ -1,0 +1,20 @@
+diff --git a/src/widgets/kurlrequester.cpp b/src/widgets/kurlrequester.cpp
+index 06e9ddb..7ed1902 100644
+--- a/src/widgets/kurlrequester.cpp
++++ b/src/widgets/kurlrequester.cpp
+@@ -346,7 +346,14 @@ void KUrlRequester::KUrlRequesterPrivate::init()
+ 
+ void KUrlRequester::setUrl(const QUrl &url)
+ {
+-    d->setText(url.toDisplayString(QUrl::PreferLocalFile));
++    if (url.isLocalFile()) {
++        // This is a workaround for strange behaviour in toDisplayString() on Windows
++        // This can be removed once the leading '/' is fixed/removed in Qt
++        d->setText(url.toLocalFile());
++    }
++    else {
++        d->setText(url.toDisplayString(QUrl::PreferLocalFile));
++    }
+ }
+ 
+ #ifndef KIOWIDGETS_NO_DEPRECATED

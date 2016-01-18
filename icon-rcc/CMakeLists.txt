@@ -13,6 +13,14 @@ add_custom_command(OUTPUT breeze.rcc
     COMMAND ${CMAKE_COMMAND} -E copy actions/22/window-close.svg actions/22/dialog-close.svg
     COMMAND ${CMAKE_COMMAND} -E copy actions/24/window-close.svg actions/24/dialog-close.svg
 
+    COMMAND ${CMAKE_COMMAND} -E copy actions/16/go-bottom.svg actions/16/go-down-search.svg
+    COMMAND ${CMAKE_COMMAND} -E copy actions/22/go-bottom.svg actions/22/go-down-search.svg
+    COMMAND ${CMAKE_COMMAND} -E copy actions/24/go-bottom.svg actions/24/go-down-search.svg
+
+    COMMAND ${CMAKE_COMMAND} -E copy actions/16/go-top.svg actions/16/go-up-search.svg
+    COMMAND ${CMAKE_COMMAND} -E copy actions/22/go-top.svg actions/22/go-up-search.svg
+    COMMAND ${CMAKE_COMMAND} -E copy actions/24/go-top.svg actions/24/go-up-search.svg
+
     COMMAND ${CMAKE_COMMAND} -E copy mimetypes/16/application-x-executable.svg mimetypes/16/application-x-ms-dos-executable.svg
     COMMAND ${CMAKE_COMMAND} -E copy mimetypes/22/application-x-executable.svg mimetypes/22/application-x-ms-dos-executable.svg
     COMMAND ${CMAKE_COMMAND} -E copy mimetypes/32/application-x-executable.svg mimetypes/32/application-x-ms-dos-executable.svg
