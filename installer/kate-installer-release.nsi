@@ -2,7 +2,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "Kate"
-!define PRODUCT_VERSION "2016.01.19alpha"
+!define PRODUCT_VERSION "2016.01.20alpha"
 !define PRODUCT_PUBLISHER "KDE"
 !define PRODUCT_WEB_SITE "http://kate-editor.org/"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\kate.exe"
@@ -201,8 +201,10 @@ Section "Kate" SEC01
   File "lib\plugins\spellcheckplugin.dll"
   SetOutPath "$INSTDIR"
   File "bin\COPYING.GPL2"
-  ExecWait "$INSTDIR\bin\vcredist_x86.exe"
+  ExecWait '"$INSTDIR\bin\vcredist_x86.exe" /passive'
+  Delete "$INSTDIR\bin\vcredist_x86.exe"
 SectionEnd
+
 
 Section -AdditionalIcons
   SetOutPath $INSTDIR
@@ -345,7 +347,6 @@ Section Uninstall
   Delete "$INSTDIR\bin\breeze.rcc"
   Delete "$INSTDIR\bin\bearer\qnativewifibearer.dll"
   Delete "$INSTDIR\bin\bearer\qgenericbearer.dll"
-  Delete "$INSTDIR\bin\vcredist_x86.exe"
 
 
   Delete "$SMPROGRAMS\Kate\Uninstall.lnk"
