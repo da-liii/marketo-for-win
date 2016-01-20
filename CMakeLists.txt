@@ -1,3 +1,10 @@
+# Thanks to KDE on Windows for the emerge scripts that showed the tips and tricks
+# how to compile frameworks on windows.
+#
+# The patches to the KF5 dependencies are copied from emerge:
+# git://anongit.kde.org/emerge.git
+#
+
 cmake_minimum_required(VERSION 3.3)
 
 project(KateOnWindows)
