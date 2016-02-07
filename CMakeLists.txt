@@ -71,6 +71,16 @@ ExternalProject_Add(png2ico
     INSTALL_COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/png2ico-prefix/src/png2ico/png2ico.exe ${CMAKE_INSTALL_PREFIX}/bin/
 )
 
+ExternalProject_Add(hunspell
+    URL https://github.com/hunspell/hunspell/archive/v1.3.4.zip
+    URL_HASH SHA256=32b4100b9906153e77b735df2a4195725f8c3bf0a61d3925961c537240a5e41a
+    PATCH_COMMAND patch -p1 -t < ${CMAKE_SOURCE_DIR}/patches/hunspell_add_cmakelists.diff
+    CMAKE_ARGS
+        -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
+        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+        -Wno-dev
+    DEPENDS
+)
 
 ############# KF5 LIBRARIES #################
 
@@ -79,6 +89,7 @@ ExternalProject_Add(ecm
     CMAKE_ARGS
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+    DEPENDS iconv hunspell png2ico gettext-tools gettext libzip zlib # force building of deps fist
 )
 
 ExternalProject_Add(Config
@@ -130,7 +141,7 @@ ExternalProject_Add(Sonnet
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
         -Wno-dev
-   DEPENDS ecm
+   DEPENDS ecm hunspell
 )
 
 ExternalProject_Add(WindowSystem
@@ -279,16 +290,6 @@ ExternalProject_Add(TextWidgets
     DEPENDS ecm Completion Config ConfigWidgets I18n IconThemes Service WidgetsAddons WindowSystem Sonnet
 )
 
-ExternalProject_Add(GlobalAccel
-    GIT_REPOSITORY "git://anongit.kde.org/kglobalaccel"
-    CMAKE_ARGS
-        -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
-        -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
-        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
-        -Wno-dev
-    DEPENDS ecm Config CoreAddons Crash DBusAddons WindowSystem
-)
-
 ExternalProject_Add(XmlGui
     GIT_REPOSITORY "git://anongit.kde.org/kxmlgui"
     CMAKE_ARGS
@@ -296,7 +297,8 @@ ExternalProject_Add(XmlGui
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
         -Wno-dev
-    DEPENDS ecm CoreAddons ItemViews Config GlobalAccel ConfigWidgets I18n IconThemes TextWidgets WidgetsAddons WindowSystem
+        -DFORCE_DISABLE_KGLOBALACCEL=1
+    DEPENDS ecm CoreAddons ItemViews Config ConfigWidgets I18n IconThemes TextWidgets WidgetsAddons WindowSystem
 )
 
 ExternalProject_Add(Bookmarks

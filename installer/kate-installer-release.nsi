@@ -2,7 +2,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "Kate"
-!define PRODUCT_VERSION "2016.01.20alpha"
+!define PRODUCT_VERSION "2016.02.07-alpha"
 !define PRODUCT_PUBLISHER "KDE"
 !define PRODUCT_WEB_SITE "http://kate-editor.org/"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\kate.exe"

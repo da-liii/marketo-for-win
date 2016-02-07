@@ -5,6 +5,8 @@ project(Icons)
 cmake_policy(SET CMP0054 NEW)
 
 add_custom_command(OUTPUT breeze.rcc
+    COMMAND ${CMAKE_COMMAND} -E copy apps/48/accessories-text-editor.svg apps/48/kate.svg
+
     COMMAND ${CMAKE_COMMAND} -E copy categories/16/applications-system.svg actions/16/games-config-options.svg
     COMMAND ${CMAKE_COMMAND} -E copy categories/22/applications-system.svg actions/22/games-config-options.svg
     COMMAND ${CMAKE_COMMAND} -E copy categories/32/applications-system.svg actions/32/games-config-options.svg
@@ -12,6 +14,10 @@ add_custom_command(OUTPUT breeze.rcc
     COMMAND ${CMAKE_COMMAND} -E copy categories/16/applications-system.svg actions/16/configure-shortcuts.svg
     COMMAND ${CMAKE_COMMAND} -E copy categories/22/applications-system.svg actions/22/configure-shortcuts.svg
     COMMAND ${CMAKE_COMMAND} -E copy categories/32/applications-system.svg actions/32/configure-shortcuts.svg
+
+    COMMAND ${CMAKE_COMMAND} -E copy actions/16/bookmark-new.svg actions/16/bookmarks.svg
+    COMMAND ${CMAKE_COMMAND} -E copy actions/22/bookmark-new.svg actions/22/bookmarks.svg
+    COMMAND ${CMAKE_COMMAND} -E copy actions/24/bookmark-new.svg actions/24/bookmarks.svg
 
     COMMAND ${CMAKE_COMMAND} -E copy actions/16/configure.svg actions/16/configure-toolbars.svg
     COMMAND ${CMAKE_COMMAND} -E copy actions/22/configure.svg actions/22/configure-toolbars.svg
