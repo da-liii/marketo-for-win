@@ -63,6 +63,15 @@ ExternalProject_Add(gettext-tools
     INSTALL_COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_BINARY_DIR}/gettext-tools-prefix/src/gettext-tools/bin ${CMAKE_INSTALL_PREFIX}/bin
 )
 
+# ExternalProject_Add(libintl-lite
+#     GIT_REPOSITORY "https://github.com/j-jorge/libintl-lite.git"
+#     CMAKE_ARGS
+#         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
+#         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+#     DEPENDS iconv
+# )
+#
+
 ExternalProject_Add(png2ico
     URL http://www.winterdrache.de/freeware/png2ico/data/png2ico-win-2002-12-08.zip
     URL_HASH SHA256=09cafe3f62a7827634ab4fcba630774ab0984bbffaab1489bd6fbb21c30818cb
@@ -90,6 +99,7 @@ ExternalProject_Add(ecm
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
     DEPENDS iconv hunspell png2ico gettext-tools gettext libzip zlib # force building of deps fist
+    #DEPENDS iconv hunspell png2ico libintl-lite libzip zlib # force building of deps fist gettext-tools gettext
 )
 
 ExternalProject_Add(Config
@@ -121,6 +131,7 @@ ExternalProject_Add(I18n
         -Wno-dev
         -DBUILD_WITH_QTSCRIPT=0
     DEPENDS ecm gettext gettext-tools
+    #DEPENDS ecm libintl-lite #gettext gettext-tools
 )
 
 ExternalProject_Add(ItemViews
@@ -136,12 +147,13 @@ ExternalProject_Add(ItemViews
 
 ExternalProject_Add(Sonnet
     GIT_REPOSITORY "git://anongit.kde.org/sonnet"
-     CMAKE_ARGS
+    PATCH_COMMAND patch -p1 -t < ${CMAKE_SOURCE_DIR}/patches/001-sonet-search-hunspell-dicts.diff
+    CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
         -Wno-dev
-   DEPENDS ecm hunspell
+    DEPENDS ecm hunspell
 )
 
 ExternalProject_Add(WindowSystem
@@ -191,7 +203,7 @@ ExternalProject_Add(Archive
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
         -Wno-dev
-    DEPENDS ecm libzip
+    DEPENDS ecm libzip I18n # I18n to force building first
 )
 
 
