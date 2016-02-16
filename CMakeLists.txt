@@ -37,24 +37,6 @@ ExternalProject_Add(libzip
     DEPENDS zlib
 )
 
-ExternalProject_Add(iconv
-    URL https://github.com/win-iconv/win-iconv/archive/0.0.6.tar.gz
-    URL_HASH SHA256=d464bbe0410f72b09f301bead9f1cf091e6aa15e97323961ecb9242c0e7f609b
-    CMAKE_ARGS
-        -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
-        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
-)
-
-ExternalProject_Add(gettext
-    URL http://ftp.gnu.org/pub/gnu/gettext/gettext-0.18.tar.gz
-    URL_HASH SHA256=02342c1de18c03c601f8b91cbd896b70486a4b945bd816f34541e0d7b5a96fe5
-    PATCH_COMMAND patch -p1 -t < ${CMAKE_SOURCE_DIR}/patches/gettext-0.18-20150423.diff
-    CMAKE_ARGS
-        -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
-        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
-    DEPENDS iconv
-)
-
 ExternalProject_Add(gettext-tools
     URL http://downloads.sourceforge.net/sourceforge/kde-windows/gettext-tools-0.18.1.1_1-bin.tar.bz2
     URL_HASH SHA256=844f3da9dac4a28dde290896fb552917947606c508e3b1f4fc0a479de90167b5
@@ -63,14 +45,13 @@ ExternalProject_Add(gettext-tools
     INSTALL_COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_BINARY_DIR}/gettext-tools-prefix/src/gettext-tools/bin ${CMAKE_INSTALL_PREFIX}/bin
 )
 
-# ExternalProject_Add(libintl-lite
-#     GIT_REPOSITORY "https://github.com/j-jorge/libintl-lite.git"
-#     CMAKE_ARGS
-#         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
-#         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
-#     DEPENDS iconv
-# )
-#
+ExternalProject_Add(libintl-lite
+    GIT_REPOSITORY "https://github.com/j-jorge/libintl-lite.git"
+    CMAKE_ARGS
+        -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
+        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+)
+
 
 ExternalProject_Add(png2ico
     URL http://www.winterdrache.de/freeware/png2ico/data/png2ico-win-2002-12-08.zip
@@ -98,8 +79,7 @@ ExternalProject_Add(ecm
     CMAKE_ARGS
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
-    DEPENDS iconv hunspell png2ico gettext-tools gettext libzip zlib # force building of deps fist
-    #DEPENDS iconv hunspell png2ico libintl-lite libzip zlib # force building of deps fist gettext-tools gettext
+    DEPENDS hunspell png2ico libintl-lite gettext-tools libzip zlib # force building of deps fist
 )
 
 ExternalProject_Add(Config
@@ -130,8 +110,7 @@ ExternalProject_Add(I18n
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
         -Wno-dev
         -DBUILD_WITH_QTSCRIPT=0
-    DEPENDS ecm gettext gettext-tools
-    #DEPENDS ecm libintl-lite #gettext gettext-tools
+    DEPENDS ecm libintl-lite gettext-tools
 )
 
 ExternalProject_Add(ItemViews
@@ -143,7 +122,6 @@ ExternalProject_Add(ItemViews
         -Wno-dev
     DEPENDS ecm
 )
-
 
 ExternalProject_Add(Sonnet
     GIT_REPOSITORY "git://anongit.kde.org/sonnet"
