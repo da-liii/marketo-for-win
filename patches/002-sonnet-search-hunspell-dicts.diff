@@ -1,0 +1,99 @@
+diff --git a/src/core/guesslanguage.cpp b/src/core/guesslanguage.cpp
+index e8deb90..e012106 100644
+--- a/src/core/guesslanguage.cpp
++++ b/src/core/guesslanguage.cpp
+@@ -278,6 +278,10 @@ void GuessLanguagePrivate::loadModels()
+ {
+     QString triMapFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("kf5/sonnet/trigrams.map"));
+ 
++    if (triMapFile.isEmpty()) {
++        triMapFile = QStringLiteral("%1/../share/kf5/sonnet/trigrams.map").arg(QCoreApplication::applicationDirPath());
++    }
++
+     QFile sin(triMapFile);
+     if (!sin.open(QIODevice::ReadOnly)) {
+         qWarning() << "Sonnet: Unable to load trigram models from file" << triMapFile;
+diff --git a/src/plugins/hunspell/hunspellclient.cpp b/src/plugins/hunspell/hunspellclient.cpp
+index 3da7219..f51adfa 100644
+--- a/src/plugins/hunspell/hunspellclient.cpp
++++ b/src/plugins/hunspell/hunspellclient.cpp
+@@ -23,6 +23,8 @@
+ #include "hunspelldebug.h"
+ 
+ #include <QDir>
++#include <QString>
++#include <QCoreApplication>
+ #include <QDebug>
+ 
+ using namespace Sonnet;
+@@ -68,6 +70,9 @@ QStringList HunspellClient::languages() const
+ #endif
+ 
+     QDir dir(QStringLiteral(HUNSPELL_MAIN_DICT_PATH));
++    if (!dir.exists()) {
++        dir.setPath(QStringLiteral("%1/../share/hunspell/").arg(QCoreApplication::applicationDirPath()));
++    }
+ 
+     if (dir.exists()) {
+         foreach (const QString &dict, dir.entryList(QStringList(AFF_MASK), QDir::Files)) {
+diff --git a/src/plugins/hunspell/hunspelldict.cpp b/src/plugins/hunspell/hunspelldict.cpp
+index bc5c314..d807e61 100644
+--- a/src/plugins/hunspell/hunspelldict.cpp
++++ b/src/plugins/hunspell/hunspelldict.cpp
+@@ -25,9 +25,15 @@
+ #include <QDebug>
+ #include <QTextCodec>
+ #include <QStringBuilder>
++#include <QCoreApplication>
+ 
+ using namespace Sonnet;
+ 
++static const QString composeDictName(const QByteArray &dirPath, const QString &lang)
++{
++    return QFile::decodeName(dirPath) + lang + QStringLiteral(".dic");
++}
++
+ HunspellDict::HunspellDict(const QString &lang)
+     : SpellerPlugin(lang)
+     , m_speller(0)
+@@ -36,26 +42,32 @@ HunspellDict::HunspellDict(const QString &lang)
+     qCDebug(SONNET_HUNSPELL) << " HunspellDict::HunspellDict( const QString& lang ):" << lang;
+ 
+     QByteArray dirPath = QByteArrayLiteral(HUNSPELL_MAIN_DICT_PATH);
+-    QString dic = QLatin1String(dirPath) % lang % QLatin1String(".dic");
++    QString dic = composeDictName(dirPath, lang);
++
++    if (!QFileInfo::exists(dic)) {
++        dirPath = QCoreApplication::applicationDirPath().toLocal8Bit() + QByteArrayLiteral("/../share/hunspell/");
++        dic = composeDictName(dirPath, lang);
++    }
+ 
+ #if defined(Q_OS_MAC) || defined(Q_OS_WIN)
+-    if (!QFileInfo(dic).exists()) {
++    if (!QFileInfo::exists(dic)) {
+ #ifdef Q_OS_MAC
+         dirPath = QByteArrayLiteral("/Applications/LibreOffice.app/Contents/Resources/extensions/dict-") + lang.leftRef(2).toLatin1();
+ #endif
+ #ifdef Q_OS_WIN
+         dirPath = QByteArrayLiteral("C:/Program Files (x86)/LibreOffice 5/share/extensions/dict-") + lang.leftRef(2).toLatin1();
+ #endif
+-        dic = QLatin1String(dirPath) % QLatin1Char('/') % lang % QLatin1String(".dic");
+-        if (lang.length()==5 && !QFileInfo(dic).exists()) {
+-            dirPath += '-' + lang.midRef(3,2).toLatin1();
+-            dic = QLatin1String(dirPath) % QLatin1Char('/') % lang % QLatin1String(".dic");
+-        }
+         dirPath += '/';
++        dic = composeDictName(dirPath, lang);
++        if (lang.length()==5 && !QFileInfo::exists(dic)) {
++            dirPath.remove(dirPath.size()-1, 1);
++            dirPath += '-' + lang.midRef(3,2).toLatin1() + '/';
++            dic = composeDictName(dirPath, lang);
++        }
+     }
+ #endif
+ 
+-    if (QFileInfo(dic).exists()) {
++    if (QFileInfo::exists(dic)) {
+         m_speller = new Hunspell(QByteArray(dirPath + lang.toLatin1() + ".aff").constData(), dic.toLatin1().constData());
+         m_codec = QTextCodec::codecForName(m_speller->get_dic_encoding());
+         if (!m_codec) {
