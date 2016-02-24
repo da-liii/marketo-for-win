@@ -125,7 +125,6 @@ ExternalProject_Add(ItemViews
 
 ExternalProject_Add(Sonnet
     GIT_REPOSITORY "git://anongit.kde.org/sonnet"
-    PATCH_COMMAND patch -p1 -t < ${CMAKE_SOURCE_DIR}/patches/002-sonnet-search-hunspell-dicts.diff
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
