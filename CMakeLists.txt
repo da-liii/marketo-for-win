@@ -212,6 +212,7 @@ ExternalProject_Add(Service
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+        -DBUILD_TESTING=0
         -Wno-dev
     DEPENDS ecm Config DBusAddons I18n CoreAddons
     #Crash DocTools

@@ -2,7 +2,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "Kate"
-!define PRODUCT_VERSION "2016.02.22-beta"
+!define PRODUCT_VERSION "2016.02.29-beta"
 !define PRODUCT_PUBLISHER "KDE"
 !define PRODUCT_WEB_SITE "http://kate-editor.org/"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\kate.exe"
@@ -91,9 +91,7 @@ Section "Kate" SEC01
   File "bin\imageformats\qgif.dll"
   File "bin\imageformats\qicns.dll"
   File "bin\imageformats\qico.dll"
-  File "bin\imageformats\qjp2.dll"
   File "bin\imageformats\qjpeg.dll"
-  File "bin\imageformats\qmng.dll"
   File "bin\imageformats\qsvg.dll"
   File "bin\imageformats\qtga.dll"
   File "bin\imageformats\qtiff.dll"
@@ -331,9 +329,7 @@ Section Uninstall
   Delete "$INSTDIR\bin\imageformats\qtiff.dll"
   Delete "$INSTDIR\bin\imageformats\qtga.dll"
   Delete "$INSTDIR\bin\imageformats\qsvg.dll"
-  Delete "$INSTDIR\bin\imageformats\qmng.dll"
   Delete "$INSTDIR\bin\imageformats\qjpeg.dll"
-  Delete "$INSTDIR\bin\imageformats\qjp2.dll"
   Delete "$INSTDIR\bin\imageformats\qico.dll"
   Delete "$INSTDIR\bin\imageformats\qicns.dll"
   Delete "$INSTDIR\bin\imageformats\qgif.dll"
