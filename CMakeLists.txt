@@ -186,7 +186,6 @@ ExternalProject_Add(Archive
 
 ExternalProject_Add(CoreAddons
     GIT_REPOSITORY "git://anongit.kde.org/kcoreaddons"
-    PATCH_COMMAND patch -p1 -t < ${CMAKE_SOURCE_DIR}/patches/002-fix-kcoreaddons_desktop_to_json.diff
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
