@@ -380,6 +380,7 @@ ExternalProject_Add(TextEditor
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+        -DPERL_EXECUTABLE=${PERL_EXECUTABLE}
         -Wno-dev
     #INSTALL_COMMAND jom install ALWAYS 0 -j4
     DEPENDS ecm Archive Config GuiAddons I18n KIO Parts Sonnet IconThemes

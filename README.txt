@@ -1,13 +1,9 @@
 Install CMake 3.3
-Install Visual Studio 2013 community
-install Qt 5.5 (including QScript)
+Install Visual Studio 2015 community
+install Qt 5.6 (including QScript)
 install jom http://wiki.qt.io/Jom
-install Git: http://git-scm.com/download/win
+install Git (+patch + perl): http://git-scm.com/download/win
 install python 3.x (https://www.python.org/downloads/) + add to path
-install perl: http://strawberryperl.com/
-      1) disable "patch.exe" from Strawberry perl (C:\Strawberry\c\bin\patch.exe)
-      2) rename Staberry\c\include (wrong libxml version)
-
 install nsis: http://sourceforge.net/projects/nsis/files/latest/download?source=directory
 
 Optionally install
@@ -16,19 +12,23 @@ An nsis editor to change the install script: http://hmne.sourceforge.net/
 
 
 # visual studio envs
-"C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\Tools\VsDevCmd.bat"
+"C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\Tools\VsDevCmd.bat"
 
 # Qt
 set PATH=%PATH%;C:\Qt\5.5\msvc2013\bin
 
 # Git and patch.exe
-set PATH=%PATH%;"C:\Program Files (x86)\Git\bin"
+set PATH=%PATH%;"C:\Program Files\Git\bin"
+
+# patch.exe and perl.exe
+set PATH=%PATH%;"C:\Program Files\Git\usr\bin"
 
 # NSIS
 set PATH=%PATH%;"C:\Program Files (x86)\NSIS"
 
-# Run Cmake
-cmake -G "NMake Makefiles JOM" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=..\install\kate ..\
+# Run Cmake NOTE the -DPERL_EXECUTABLE=... at the end
+# CMake does not seem to find perl from the Git binary directory without this help.
+cmake -G "NMake Makefiles JOM" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=..\install\kate ..\ -DPERL_EXECUTABLE="C:\Program Files\Git\usr\bin\perl.exe"
 
 # build
 cmake --build . --config Release
@@ -49,3 +49,14 @@ cmake --build . --config Debug
 # Release
 cmake -G "NMake Makefiles JOM" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=..\release ..\
 cmake --build . --config Release
+
+
+Qt 5.6 MSVC 2015:
+"C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\Tools\VsDevCmd.bat"
+set PATH=%PATH%;C:\Qt\5.6\msvc2015\bin
+set PATH=%PATH%;"C:\Program Files\Git\bin"
+set PATH=%PATH%;"C:\Program Files\Git\usr\bin"
+set PATH=%PATH%;"C:\Program Files (x86)\NSIS"
+cmake -G "NMake Makefiles JOM" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=..\release5.6 ..\ -DPERL_EXECUTABLE="C:\Program Files\Git\usr\bin\perl.exe"
+cmake --build . --config Release
+
