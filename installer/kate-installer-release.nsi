@@ -79,6 +79,7 @@ FunctionEnd
 
 
 Section "Kate" SEC01
+  SectionIn RO
   SetOutPath "$INSTDIR\bin\bearer"
   SetOverwrite try
   File "bin\bearer\qgenericbearer.dll"
@@ -210,21 +211,21 @@ Section "Download English(US) Dictionary" SEC02
   MessageBox MB_OK "Downloading US dictionary status: $0"
 SectionEnd
 
-Section "Download German(DE) Dictionary" SEC03
+Section /o "Download German(DE) Dictionary" SEC03
   SetOutPath "$INSTDIR\share\hunspell"
   inetc::get "https://cgit.freedesktop.org/libreoffice/dictionaries/plain/de/de_DE_frami.aff" "de_DE.aff" "https://cgit.freedesktop.org/libreoffice/dictionaries/plain/de/de_DE_frami.dic" "de_DE.dic" /end
   Pop $0
   MessageBox MB_OK "Download German(DE) dictionary status: $0"
 SectionEnd
 
-Section "Download Spanish(eu_ES) Dictionary" SEC04
+Section /o "Download Spanish(eu_ES) Dictionary" SEC04
   SetOutPath "$INSTDIR\share\hunspell"
   inetc::get "https://cgit.freedesktop.org/libreoffice/dictionaries/plain/es/es_ANY.aff" "eu_ES.aff" "https://cgit.freedesktop.org/libreoffice/dictionaries/plain/es/es_ANY.dic" "eu_ES.dic" /end
   Pop $0
   MessageBox MB_OK "Download Spanish dictionary status: $0"
 SectionEnd
 
-Section "Download Swedish(SE) Dictionary" SEC05
+Section /o "Download Swedish(SE) Dictionary" SEC05
   SetOutPath "$INSTDIR\share\hunspell"
   inetc::get "https://cgit.freedesktop.org/libreoffice/dictionaries/plain/sv_SE/sv_SE.aff" "sv_SE.aff" "https://cgit.freedesktop.org/libreoffice/dictionaries/plain/sv_SE/sv_SE.dic" "sv_SE.dic" /end
   Pop $0
