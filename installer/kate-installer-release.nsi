@@ -21,6 +21,8 @@
 !insertmacro MUI_PAGE_WELCOME
 ; License page
 !insertmacro MUI_PAGE_LICENSE "bin\COPYING.GPL2"
+; Components page
+!insertmacro MUI_PAGE_COMPONENTS
 ; Directory page
 !insertmacro MUI_PAGE_DIRECTORY
 ; Instfiles page
@@ -201,6 +203,33 @@ Section "Kate" SEC01
   Delete "$INSTDIR\bin\vcredist_x86.exe"
 SectionEnd
 
+Section "Download English(US) Dictionary" SEC02
+  SetOutPath "$INSTDIR\share\hunspell"
+  inetc::get "https://cgit.freedesktop.org/libreoffice/dictionaries/plain/en/en_US.aff" "en_US.aff" "https://cgit.freedesktop.org/libreoffice/dictionaries/plain/en/en_US.dic" "en_US.dic" /end
+  Pop $0
+  MessageBox MB_OK "Downloading US dictionary status: $0"
+SectionEnd
+
+Section "Download German(DE) Dictionary" SEC03
+  SetOutPath "$INSTDIR\share\hunspell"
+  inetc::get "https://cgit.freedesktop.org/libreoffice/dictionaries/plain/de/de_DE_frami.aff" "de_DE.aff" "https://cgit.freedesktop.org/libreoffice/dictionaries/plain/de/de_DE_frami.dic" "de_DE.dic" /end
+  Pop $0
+  MessageBox MB_OK "Download German(DE) dictionary status: $0"
+SectionEnd
+
+Section "Download Spanish(eu_ES) Dictionary" SEC04
+  SetOutPath "$INSTDIR\share\hunspell"
+  inetc::get "https://cgit.freedesktop.org/libreoffice/dictionaries/plain/es/es_ANY.aff" "eu_ES.aff" "https://cgit.freedesktop.org/libreoffice/dictionaries/plain/es/es_ANY.dic" "eu_ES.dic" /end
+  Pop $0
+  MessageBox MB_OK "Download Spanish dictionary status: $0"
+SectionEnd
+
+Section "Download Swedish(SE) Dictionary" SEC05
+  SetOutPath "$INSTDIR\share\hunspell"
+  inetc::get "https://cgit.freedesktop.org/libreoffice/dictionaries/plain/sv_SE/sv_SE.aff" "sv_SE.aff" "https://cgit.freedesktop.org/libreoffice/dictionaries/plain/sv_SE/sv_SE.dic" "sv_SE.dic" /end
+  Pop $0
+  MessageBox MB_OK "Download Swedish dictionary status: $0"
+SectionEnd
 
 Section -AdditionalIcons
   SetOutPath $INSTDIR
@@ -224,6 +253,14 @@ Section -Post
 
 SectionEnd
 
+; Section descriptions
+!insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
+  !insertmacro MUI_DESCRIPTION_TEXT ${SEC01} "This is the Kate application"
+  !insertmacro MUI_DESCRIPTION_TEXT ${SEC02} "Download English(US) dictionary for spell-checking ..."
+  !insertmacro MUI_DESCRIPTION_TEXT ${SEC03} "Download German dictionary for spell-checking ..."
+  !insertmacro MUI_DESCRIPTION_TEXT ${SEC04} "Download Spanish dictionary for spell-checking ..."
+  !insertmacro MUI_DESCRIPTION_TEXT ${SEC05} "Download Swedish dictionary for spell-checking ..."
+!insertmacro MUI_FUNCTION_DESCRIPTION_END
 
 Function un.onUninstSuccess
   HideWindow

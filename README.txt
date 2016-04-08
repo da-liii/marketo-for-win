@@ -5,6 +5,7 @@ install jom http://wiki.qt.io/Jom
 install Git (+patch + perl): http://git-scm.com/download/win
 install python 3.x (https://www.python.org/downloads/) + add to path
 install nsis: http://sourceforge.net/projects/nsis/files/latest/download?source=directory
+        and install the NSIS Inetc plugin (Ascii version dll)
 
 Optionally install
 An nsis editor to change the install script: http://hmne.sourceforge.net/
