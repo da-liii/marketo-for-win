@@ -12,7 +12,7 @@ target_link_libraries(qrcAlias PUBLIC Qt5::Core)
 add_custom_command(OUTPUT breeze.rcc
     COMMAND rcc -project -o icons.qrc
 
-    COMMAND $<TARGET_FILE_NAME:qrcAlias> -i icons.qrc -o aliased.qrc
+    COMMAND $<TARGET_FILE_DIR:qrcAlias>/$<TARGET_FILE_NAME:qrcAlias> -i icons.qrc -o aliased.qrc
 
     COMMAND rcc -binary -o ${CMAKE_BINARY_DIR}/breeze.rcc -root /icons/breeze aliased.qrc
 
