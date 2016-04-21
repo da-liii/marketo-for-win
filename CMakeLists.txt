@@ -112,7 +112,7 @@ ExternalProject_Add(GuiAddons
 )
 
 ExternalProject_Add(I18n
-    GIT_REPOSITORY "git://anongit.kde.org/ki18n"
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/src/ki18n
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -194,7 +194,7 @@ ExternalProject_Add(Archive
 
 
 ExternalProject_Add(CoreAddons
-    GIT_REPOSITORY "https://github.com/KDE/kcoreaddons.git"
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/src/kcoreaddons
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -289,7 +289,7 @@ ExternalProject_Add(TextWidgets
 )
 
 ExternalProject_Add(XmlGui
-    GIT_REPOSITORY "git://anongit.kde.org/kxmlgui"
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/src/kxmlgui
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -374,7 +374,7 @@ ExternalProject_Add(Parts
 
 
 ExternalProject_Add(TextEditor
-    SOURCE_DIR ${CMAKE_SOURCE_DIR}/src/TextEditor
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/src/ktexteditor
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -422,6 +422,7 @@ ExternalProject_Add(Deploy
     CMAKE_ARGS
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
         -Wno-dev
+    DEPENDS IconRcc
 )
 
 
@@ -432,5 +433,5 @@ ExternalProject_Add(Installer
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
         -Wno-dev
     INSTALL_COMMAND echo done
-    DEPENDS IconRcc
+    DEPENDS Deploy
 )

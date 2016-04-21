@@ -7,3 +7,12 @@
 [submodule "src/libmdcpp"]
 	path = src/libmdcpp
 	url = https://github.com/sadhen/libmdcpp.git
+[submodule "src/kcoreaddons"]
+	path = src/kcoreaddons
+	url = https://github.com/KDE/kcoreaddons.git
+[submodule "src/ki18n"]
+	path = src/ki18n
+	url = https://github.com/KDE/ki18n.git
+[submodule "src/kxmlgui"]
+	path = src/kxmlgui
+	url = https://github.com/KDE/kxmlgui.git
