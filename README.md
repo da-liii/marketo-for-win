@@ -9,6 +9,7 @@
 7. install python 3.x (https://www.python.org/downloads/) + add to path
 8. install nsis: [http://sourceforge.net/projects/nsis/files/latest/download?source=directory](http://sourceforge.net/projects/nsis/files/latest/download?source=directory)
    and install the NSIS Inetc plugin (Ascii version dll)
+9. install prebuilt 64bit boost
 
 Optionally install
 An nsis editor to change the install script: http://hmne.sourceforge.net/
@@ -29,7 +30,7 @@ set PATH=%PATH%;"C:\Program Files (x86)\NSIS"
 
 # Run Cmake NOTE the -DPERL_EXECUTABLE=... at the end
 # CMake does not seem to find perl from the Git binary directory without this help.
-cmake -G "NMake Makefiles JOM" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=..\install\kate ..\ -DPERL_EXECUTABLE="C:\Program Files\Git\usr\bin\perl.exe"
+cmake -G "NMake Makefiles JOM" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=..\release ..\ -DPERL_EXECUTABLE="C:\Program Files\Git\usr\bin\perl.exe"
 
 # build
 cmake --build . --config Release

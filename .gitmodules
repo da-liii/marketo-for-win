@@ -16,3 +16,75 @@
 [submodule "src/kxmlgui"]
 	path = src/kxmlgui
 	url = https://github.com/KDE/kxmlgui.git
+[submodule "src/ecm"]
+	path = src/ecm
+	url = https://github.com/KDE/extra-cmake-modules.git
+[submodule "src/breeze-icons"]
+	path = src/breeze-icons
+	url = https://github.com/KDE/breeze-icons.git
+[submodule "src/karchive"]
+	path = src/karchive
+	url = https://github.com/KDE/karchive.git
+[submodule "src/kconfig"]
+	path = src/kconfig
+	url = https://github.com/KDE/kconfig.git
+[submodule "src/kguiaddons"]
+	path = src/kguiaddons
+	url = https://github.com/KDE/kguiaddons.git
+[submodule "src/kio"]
+	path = src/kio
+	url = https://github.com/KDE/kio.git
+[submodule "src/kparts"]
+	path = src/kparts
+	url = https://github.com/KDE/kparts.git
+[submodule "src/sonnet"]
+	path = src/sonnet
+	url = https://github.com/KDE/sonnet.git
+[submodule "src/kdbusaddons"]
+	path = src/kdbusaddons
+	url = https://github.com/KDE/kdbusaddons.git
+[submodule "src/kwindowsystem"]
+	path = src/kwindowsystem
+	url = https://github.com/KDE/kwindowsystem.git
+[submodule "src/kwidgetsaddons"]
+	path = src/kwidgetsaddons
+	url = https://github.com/KDE/kwidgetsaddons.git
+[submodule "src/kcompletion"]
+	path = src/kcompletion
+	url = https://github.com/KDE/kcompletion.git
+[submodule "src/kjobwidgets"]
+	path = src/kjobwidgets
+	url = https://github.com/KDE/kjobwidgets.git
+[submodule "src/ktextwidgets"]
+	path = src/ktextwidgets
+	url = https://github.com/KDE/ktextwidgets.git
+[submodule "src/kservice"]
+	path = src/kservice
+	url = https://github.com/KDE/kservice.git
+[submodule "src/kcodecs"]
+	path = src/kcodecs
+	url = https://github.com/KDE/kcodecs.git
+[submodule "src/kauth"]
+	path = src/kauth
+	url = https://github.com/KDE/kauth.git
+[submodule "src/kconfigwidgets"]
+	path = src/kconfigwidgets
+	url = https://github.com/KDE/kconfigwidgets.git
+[submodule "src/kiconthemes"]
+	path = src/kiconthemes
+	url = https://github.com/KDE/kiconthemes.git
+[submodule "src/kbookmarks"]
+	path = src/kbookmarks
+	url = https://github.com/KDE/kbookmarks.git
+[submodule "src/attica"]
+	path = src/attica
+	url = https://github.com/KDE/attica.git
+[submodule "src/solid"]
+	path = src/solid
+	url = https://github.com/KDE/solid.git
+[submodule "src/kitemviews"]
+	path = src/kitemviews
+	url = https://github.com/KDE/kitemviews.git
+[submodule "src/kcrash"]
+	path = src/kcrash
+	url = https://github.com/KDE/kcrash.git

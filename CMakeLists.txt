@@ -84,7 +84,7 @@ ExternalProject_Add(hunspell
 ############# KF5 LIBRARIES #################
 
 ExternalProject_Add(ecm
-    GIT_REPOSITORY "git://anongit.kde.org/extra-cmake-modules"
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/src/ecm
     CMAKE_ARGS
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
@@ -92,7 +92,7 @@ ExternalProject_Add(ecm
 )
 
 ExternalProject_Add(Config
-    GIT_REPOSITORY "git://anongit.kde.org/kconfig"
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/src/kconfig
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -102,7 +102,7 @@ ExternalProject_Add(Config
 )
 
 ExternalProject_Add(GuiAddons
-    GIT_REPOSITORY "git://anongit.kde.org/kguiaddons"
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/src/kguiaddons
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -123,7 +123,7 @@ ExternalProject_Add(I18n
 )
 
 ExternalProject_Add(ItemViews
-    GIT_REPOSITORY "git://anongit.kde.org/kitemviews"
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/src/kitemviews
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -133,7 +133,7 @@ ExternalProject_Add(ItemViews
 )
 
 ExternalProject_Add(Sonnet
-    GIT_REPOSITORY "git://anongit.kde.org/sonnet"
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/src/sonnet
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -143,7 +143,7 @@ ExternalProject_Add(Sonnet
 )
 
 ExternalProject_Add(WindowSystem
-    GIT_REPOSITORY "git://anongit.kde.org/kwindowsystem"
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/src/kwindowsystem
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -153,7 +153,7 @@ ExternalProject_Add(WindowSystem
 )
 
 ExternalProject_Add(WidgetsAddons
-    GIT_REPOSITORY "git://anongit.kde.org/kwidgetsaddons"
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/src/kwidgetsaddons
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -163,7 +163,7 @@ ExternalProject_Add(WidgetsAddons
 )
 
 ExternalProject_Add(Completion
-    GIT_REPOSITORY "git://anongit.kde.org/kcompletion"
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/src/kcompletion
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -173,7 +173,7 @@ ExternalProject_Add(Completion
 )
 
 ExternalProject_Add(DBusAddons
-    GIT_REPOSITORY "git://anongit.kde.org/kdbusaddons"
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/src/kdbusaddons
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -183,7 +183,7 @@ ExternalProject_Add(DBusAddons
 )
 
 ExternalProject_Add(Archive
-    GIT_REPOSITORY "git://anongit.kde.org/karchive"
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/src/karchive
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -205,7 +205,7 @@ ExternalProject_Add(CoreAddons
 
 
 ExternalProject_Add(JobWidgets
-    GIT_REPOSITORY "git://anongit.kde.org/kjobwidgets"
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/src/kjobwidgets
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -214,20 +214,29 @@ ExternalProject_Add(JobWidgets
     DEPENDS ecm CoreAddons
 )
 
+ExternalProject_Add(Crash
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/src/kcrash
+    CMAKE_ARGS
+        -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
+        -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
+        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+        -Wno-dev
+    DEPENDS ecm CoreAddons WindowSystem
+)
+
 ExternalProject_Add(Service
-    GIT_REPOSITORY "https://github.com/KDE/kservice"
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/src/kservice
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
         -DBUILD_TESTING=0
         -Wno-dev
-    DEPENDS ecm Config DBusAddons I18n CoreAddons
-    #Crash DocTools
+    DEPENDS ecm Config DBusAddons I18n CoreAddons Crash
 )
 
 ExternalProject_Add(Codecs
-    GIT_REPOSITORY "git://anongit.kde.org/kcodecs"
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/src/kcodecs
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -237,18 +246,8 @@ ExternalProject_Add(Codecs
 )
 
 
-ExternalProject_Add(Crash
-    GIT_REPOSITORY "git://anongit.kde.org/kcrash"
-    CMAKE_ARGS
-        -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
-        -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
-        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
-        -Wno-dev
-    DEPENDS ecm CoreAddons WindowSystem
-)
-
 ExternalProject_Add(Auth
-    GIT_REPOSITORY "git://anongit.kde.org/kauth"
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/src/kauth
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -258,7 +257,7 @@ ExternalProject_Add(Auth
 )
 
 ExternalProject_Add(ConfigWidgets
-    GIT_REPOSITORY "git://anongit.kde.org/kconfigwidgets"
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/src/kconfigwidgets
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -268,7 +267,7 @@ ExternalProject_Add(ConfigWidgets
 )
 
 ExternalProject_Add(IconThemes
-    GIT_REPOSITORY "git://anongit.kde.org/kiconthemes"
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/src/kiconthemes
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -279,7 +278,7 @@ ExternalProject_Add(IconThemes
 
 
 ExternalProject_Add(TextWidgets
-    GIT_REPOSITORY "git://anongit.kde.org/ktextwidgets"
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/src/ktextwidgets
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -300,7 +299,7 @@ ExternalProject_Add(XmlGui
 )
 
 ExternalProject_Add(Bookmarks
-    GIT_REPOSITORY "git://anongit.kde.org/kbookmarks"
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/src/kbookmarks
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -309,28 +308,8 @@ ExternalProject_Add(Bookmarks
     DEPENDS ecm Config CoreAddons Codecs ConfigWidgets IconThemes WidgetsAddons XmlGui
 )
 
-ExternalProject_Add(ThreadWeaver
-    GIT_REPOSITORY "git://anongit.kde.org/threadweaver"
-    CMAKE_ARGS
-        -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
-        -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
-        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
-        -Wno-dev
-    DEPENDS ecm
-)
-
-ExternalProject_Add(ItemModels
-    GIT_REPOSITORY "git://anongit.kde.org/kitemmodels"
-    CMAKE_ARGS
-        -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
-        -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
-        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
-        -Wno-dev
-    DEPENDS ecm
-)
-
 ExternalProject_Add(Attica
-    GIT_REPOSITORY "git://anongit.kde.org/attica"
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/src/attica
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -338,8 +317,9 @@ ExternalProject_Add(Attica
         -Wno-dev
     DEPENDS ecm
 )
+
 ExternalProject_Add(Solid
-    GIT_REPOSITORY "git://anongit.kde.org/solid"
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/src/solid
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -347,8 +327,9 @@ ExternalProject_Add(Solid
         -Wno-dev
     DEPENDS ecm
 )
+
 ExternalProject_Add(KIO
-    GIT_REPOSITORY "git://anongit.kde.org/kio"
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/src/kio
     PATCH_COMMAND patch -p1 -t < ${CMAKE_SOURCE_DIR}/patches/001-kio-workaround-leading-slash-on-toDisplayString.diff
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
@@ -361,8 +342,8 @@ ExternalProject_Add(KIO
 
 
 ExternalProject_Add(Parts
-    GIT_REPOSITORY "git://anongit.kde.org/kparts"
-     CMAKE_ARGS
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/src/kparts
+    CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
@@ -382,11 +363,11 @@ ExternalProject_Add(TextEditor
         -DPERL_EXECUTABLE=${PERL_EXECUTABLE}
         -Wno-dev
     #INSTALL_COMMAND jom install ALWAYS 0 -j4
-    #DEPENDS ecm Archive Config GuiAddons I18n KIO Parts Sonnet IconThemes
+    DEPENDS ecm Archive Config GuiAddons I18n KIO Parts Sonnet IconThemes
 )
 
 ExternalProject_Add(BreezeIcons
-    GIT_REPOSITORY "git://anongit.kde.org/breeze-icons"
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/src/breeze-icons
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -394,8 +375,7 @@ ExternalProject_Add(BreezeIcons
         -Wno-dev
     #INSTALL_COMMAND jom install ALWAYS 0 -j4
     DEPENDS ecm
-
-    )
+)
 
 
 ExternalProject_Add(marketo
@@ -406,7 +386,7 @@ ExternalProject_Add(marketo
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
         -Wno-dev
         #INSTALL_COMMAND jom install ALWAYS 1 -j4
-    DEPENDS libmdcpp ecm CoreAddons I18n TextEditor XmlGui
+    #DEPENDS libmdcpp ecm CoreAddons I18n TextEditor XmlGui
 )
 
 ExternalProject_Add(IconRcc
