@@ -1,0 +1,9 @@
+[submodule "src/ktexteditor"]
+	path = src/ktexteditor
+	url = https://github.com/KDE/ktexteditor.git
+[submodule "src/marketo"]
+	path = src/marketo
+	url = https://github.com/sadhen/marketo.git
+[submodule "src/libmdcpp"]
+	path = src/libmdcpp
+	url = https://github.com/sadhen/libmdcpp.git

@@ -27,6 +27,15 @@ ExternalProject_Add(zlib
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
 )
 
+ExternalProject_Add(libmdcpp
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/src/libmdcpp
+    CMAKE_ARGS
+        -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
+        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+        -DBOOST_ROOT=C:/local/boost_1_60_0
+        -DBOOST_LIBRARYDIR=C:/local/boost_1_60_0/lib64-msvc-14.0
+)
+
 ExternalProject_Add(libzip
     URL http://www.nih.at/libzip/libzip-0.11.1.tar.xz
     URL_HASH SHA256=65338688f157784c80824d222f779505416d066c701409f6aef6b886bcd856a4
@@ -185,7 +194,7 @@ ExternalProject_Add(Archive
 
 
 ExternalProject_Add(CoreAddons
-    GIT_REPOSITORY "git://anongit.kde.org/kcoreaddons"
+    GIT_REPOSITORY "https://github.com/KDE/kcoreaddons.git"
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -206,7 +215,7 @@ ExternalProject_Add(JobWidgets
 )
 
 ExternalProject_Add(Service
-    GIT_REPOSITORY "git://anongit.kde.org/kservice"
+    GIT_REPOSITORY "https://github.com/KDE/kservice"
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -350,16 +359,6 @@ ExternalProject_Add(KIO
     #Wallet
 )
 
-ExternalProject_Add(NewStuff
-    GIT_REPOSITORY "git://anongit.kde.org/knewstuff"
-    CMAKE_ARGS
-        -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
-        -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
-        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
-        -Wno-dev
-    DEPENDS ecm Attica Archive Completion Config CoreAddons I18n IconThemes KIO ItemViews Service TextWidgets WidgetsAddons XmlGui
-)
-
 
 ExternalProject_Add(Parts
     GIT_REPOSITORY "git://anongit.kde.org/kparts"
@@ -375,7 +374,7 @@ ExternalProject_Add(Parts
 
 
 ExternalProject_Add(TextEditor
-    GIT_REPOSITORY "git://anongit.kde.org/ktexteditor"
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/src/TextEditor
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
@@ -383,9 +382,8 @@ ExternalProject_Add(TextEditor
         -DPERL_EXECUTABLE=${PERL_EXECUTABLE}
         -Wno-dev
     #INSTALL_COMMAND jom install ALWAYS 0 -j4
-    DEPENDS ecm Archive Config GuiAddons I18n KIO Parts Sonnet IconThemes
-
-    )
+    #DEPENDS ecm Archive Config GuiAddons I18n KIO Parts Sonnet IconThemes
+)
 
 ExternalProject_Add(BreezeIcons
     GIT_REPOSITORY "git://anongit.kde.org/breeze-icons"
@@ -400,24 +398,23 @@ ExternalProject_Add(BreezeIcons
     )
 
 
-ExternalProject_Add(Kate
-    GIT_REPOSITORY "git://anongit.kde.org/kate"
+ExternalProject_Add(marketo
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/src/marketo
     CMAKE_ARGS
         -DECM_DIR:PATH=${CMAKE_INSTALL_PREFIX}/share/ECM/cmake
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
         -Wno-dev
         #INSTALL_COMMAND jom install ALWAYS 1 -j4
-    DEPENDS ecm Config GuiAddons I18n JobWidgets KIO Parts TextEditor WindowSystem XmlGui IconThemes ItemViews ItemModels NewStuff png2ico
+    DEPENDS libmdcpp ecm CoreAddons I18n TextEditor XmlGui
 )
-
 
 ExternalProject_Add(IconRcc
     SOURCE_DIR ${CMAKE_SOURCE_DIR}/icon-rcc
     CMAKE_ARGS
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
         -Wno-dev
-    DEPENDS Kate
+    DEPENDS marketo
 )
 
 ExternalProject_Add(Deploy
@@ -425,7 +422,6 @@ ExternalProject_Add(Deploy
     CMAKE_ARGS
         -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
         -Wno-dev
-    DEPENDS Kate
 )
 
 
@@ -436,9 +432,5 @@ ExternalProject_Add(Installer
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
         -Wno-dev
     INSTALL_COMMAND echo done
-    DEPENDS Deploy IconRcc
+    DEPENDS IconRcc
 )
-
-
-
-

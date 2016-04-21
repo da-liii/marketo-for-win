@@ -7,7 +7,7 @@ cmake_policy(SET CMP0054 NEW)
 
 message(STATUS ${CMAKE_BUILD_TYPE})
 if (${CMAKE_BUILD_TYPE} STREQUAL "Release")
-    set(NsisScript "kate-installer-release.nsi")
+    set(NsisScript "marketo-installer-release.nsi")
 
     add_custom_target(invalidate_files ALL
                   COMMAND ${CMAKE_COMMAND} -E touch ${CMAKE_CURRENT_SOURCE_DIR}/${NsisScript}
