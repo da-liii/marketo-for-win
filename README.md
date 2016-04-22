@@ -38,3 +38,6 @@ cmake --build . --config Release
 
 ## TroubleShooting
 1. Encoding Problem: [http://stackoverflow.com/questions/16746966/how-can-handle-foreign-words-in-c-code](http://stackoverflow.com/questions/16746966/how-can-handle-foreign-words-in-c-code)
+
+## Snapshot
+![](https://github.com/sadhen/marketo-for-win/raw/master/markpado.png)
